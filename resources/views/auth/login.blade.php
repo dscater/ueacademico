@@ -8,19 +8,19 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href=""><b>{{App\RazonSocial::first()->nombre}}</b></a>
+        <a href="" class="text-success"><b>{{App\RazonSocial::first()->nombre}}</b></a>
         <img src="{{asset('imgs/'.App\RazonSocial::first()->logo)}}" alt="Logo">
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Iniciar Sesión</p>
+            <p class="login-box-msg text-success">Iniciar Sesión</p>
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="name" value="{{old('name')}}" class="form-control" autofocus placeholder="Usuario">
                     <div class="input-group-append">
-                        <div class="input-group-text">
+                        <div class="input-group-text bg-success">
                         <span class="fas fa-user"></span>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="input-group mb-3">
                     <input type="password" name="password" class="form-control" placeholder="Contraseña">
                     <div class="input-group-append">
-                        <div class="input-group-text">
+                        <div class="input-group-text bg-success">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="row">
                 <!-- /.col -->
                 <div class="col-12 mb-2">
-                    <button type="submit" class="btn btn-primary bg-navy btn-block btn-sm">Acceder</button>
+                    <button type="submit" class="btn btn-block btn-outline-success btn-sm">Acceder</button>
                 </div>
                 <!-- /.col -->
                 </div>

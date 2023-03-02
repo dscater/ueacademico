@@ -61,7 +61,7 @@
 
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-dark navbar-warning bg-blue">
+        <nav class="main-header navbar navbar-expand navbar-success">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -155,7 +155,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
-                        <li class="user-header bg-blue">
+                        <li class="user-header bg-success">
                             <img src="{{ asset('imgs/users/' . Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image">
                             <p class="text-white">{{ $nombre_usuario }}{{-- <small>Member since Nov. 2012</small>--}}</p>
                             <p class="text-white">{{Auth::user()->tipo}}</p>
@@ -188,9 +188,9 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar elevation-4 sidebar-dark-navy bg-blue">
+        <aside class="main-sidebar elevation-4 sidebar-light-success">
             <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="brand-link navbar-warning bg-blue">
+            <a href="{{ route('home') }}" class="brand-link bg-success">
                 <img src="{{ asset('imgs/' . App\RazonSocial::first()->logo) }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ App\RazonSocial::first()->alias }}</span>

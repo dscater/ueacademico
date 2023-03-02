@@ -35,8 +35,8 @@ legend.scheduler-border {
     border-radius: 0px !important;
 }
 
-.label_normal > li > label{
-    font-weight: normal!important;
+.label_normal>li>label {
+    font-weight: normal !important;
 }
 
 /* FORMULARIOS */
@@ -48,31 +48,11 @@ legend.scheduler-border {
     background: rgb(233, 233, 233);
 }
 
-.nav.nav-tabs>li.active>a {
-    color: rgb(2, 182, 122);
+
+
+.nav-treeview>.nav-item>.nav-link.active i.nav-icon{
+    color: #2ac74e;
 }
-
-/* .main-sidebar .brand-text, .main-sidebar .logo-xl, .main-sidebar .logo-xs, .sidebar .nav-link p, .sidebar .user-panel .info a{
-    color:rgb(43, 43, 43)!important;    
-} */
-
-.main-sidebar {
-    background: rgb(0, 95, 173) !important;
-}
-
-.brand-link {
-    background: rgb(0, 95, 173) !important;
-}
-
-.nav-sidebar .nav-item>.nav-link {
-    /* color:rgb(43, 43, 43)!important;   */
-    color: white;
-}
-
-/* .nav-item>.nav-link.active {
-    background: rgb(0, 0, 31) !important;
-    color: white !important;
-} */
 
 .nav-item>.nav-link.active p {
     /* color: white !important; */
@@ -88,7 +68,8 @@ legend.scheduler-border {
 
 .nav-item.menu-is-opening.menu-open.active>.nav-link {
     /* background:orange!important; */
-    border-bottom: solid 2px rgb(0, 0, 31) !important;
+    background: #28a745;
+    color: white;
 }
 
 ol.breadcrumb {
@@ -110,11 +91,11 @@ ol.breadcrumb .breadcrumb-item.active {
     border-radius: 0px !important;
 }
 
-.card-footer > a.btn{
-    padding: 8px!important;
+.card-footer>a.btn {
+    padding: 8px !important;
     margin: 3px;
-    font-size: 0.85em!important;
-    border-radius: 0px!important;
+    font-size: 0.85em !important;
+    border-radius: 0px !important;
 }
 
 /* TABLAS */
@@ -528,6 +509,10 @@ select {
 
 li.no {
     background-color: #00a65a;
+    color: white;
+}
+
+.navbar-nav li a.nav-link {
     color: white;
 }
 
