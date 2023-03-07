@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<div class="col-md-4">
+{{-- <div class="col-md-4">
     <div class="boton_reporte">
         <a href="#" data-toggle="modal" data-target="#m_pagos_estudiantes" class="btn btn-info">Pagos de Estudiantes</a>
     </div>
@@ -56,4 +56,4 @@
     <div class="boton_reporte">
         <a href="#" data-toggle="modal" data-target="#m_asistencias" class="btn btn-info">Asistencia de Profesores</a>
     </div>
-</div>
+</div> --}}

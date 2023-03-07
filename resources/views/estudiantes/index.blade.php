@@ -53,8 +53,12 @@
                                     <td>{{$estudiante->nro_doc}} {{$estudiante->ci_exp}}</td>
                                     <td>{{$estudiante->fono_dir}}</td>
                                     <td>{{$estudiante->provincia}}, {{$estudiante->zona_dir}} {{$estudiante->municipio_dir}} {{$estudiante->avenida_dir}} {{$estudiante->localidad_dir}} {{$estudiante->nro_dir}}</td>
-                                    <td>{{$estudiante->ap_padre_tutor}} {{$estudiante->nom_padre_tutor}}</td>
+                                    <td>
+                                        {{$estudiante->ap_padre_tutor}} {{$estudiante->nom_padre_tutor}}<br/>
+                                        <a href="{{route('estudiantes.info_tutor',$estudiante->id)}}">Ver más...</a>
+                                    </td>
                                     <td class="btns-opciones">
+                                        <a href="{{route('estudiantes.formulario',$estudiante->id)}}" class="ir-evaluacion" target="_blank"><i class="fa fa-file-pdf" data-toggle="tooltip" data-placement="left" title="Formulario"></i></a>
                                         @if(Auth::user()->tipo == 'ADMINISTRADOR')
                                         <a href="{{route('estudiantes.edit',$estudiante->id)}}" class="modificar"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Modificar"></i></a>
     

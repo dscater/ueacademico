@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\estudiante;
+use App\Estudiante;
 use App\Http\Controllers\UserController;
 use App\Http\Requests\EstudianteStoreRequest;
 use App\Http\Requests\EstudianteUpdateRequest;
 
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class EstudianteController extends Controller
 {
@@ -34,25 +35,14 @@ class EstudianteController extends Controller
         $estudiante->tipo_doc .= 'CI';
         $estudiante->estado = 1;
         $nombre_estudiante = UserController::nombreUsuario($request->nombre, $request->paterno, $request->materno);
+        $nro_codigo = UserController::getCodigoUsuario("ESTUDIANTE");
+        $nombre_estudiante = $nombre_estudiante . $nro_codigo;
 
-        // obtener el código incremental
-        $ultimo_estudiante = Estudiante::select('estudiantes.*')
-            ->join('users', 'users.id', '=', 'estudiantes.user_id')
-            ->where('estudiantes.estado', 1)
-            ->orderBy('users.id', 'ASC')
-            ->get()->last();
-
-        $nro_codigo = 500001;
-        if ($ultimo_estudiante) {
-            $nro_codigo = (int)$ultimo_estudiante->user->codigo +  1;
-        }
-
-        $nombre_estudiante = $nombre_estudiante . '' . $nro_codigo;
-
+        // usuario estudiante
         $nuevo_usuario = new User();
         $nuevo_usuario->name = $nombre_estudiante;
         $nuevo_usuario->password = Hash::make($request->nro_doc);
-        $nuevo_usuario->tipo = 'estudiante';
+        $nuevo_usuario->tipo = 'ESTUDIANTE';
         $nuevo_usuario->foto = 'user_default.png';
         $nuevo_usuario->codigo = $nro_codigo;
         $nuevo_usuario->estado = 1;
@@ -65,8 +55,36 @@ class EstudianteController extends Controller
             $nuevo_usuario->foto = $nom_foto;
             $estudiante->foto = $nom_foto;
         }
-
         $nuevo_usuario->save();
+
+        // usuario tutor
+        $nombre_tutor = UserController::nombreUsuario($request->nom_padre_tutor, $request->app_padre_tutor, $request->apm_padre_tutor);
+        $nro_codigo = UserController::getCodigoUsuario("TUTOR");
+        $nombre_tutor = $nro_codigo . $nombre_tutor;
+        $nuevo_usuario = new User();
+        $nuevo_usuario->name = $nombre_tutor;
+        $nuevo_usuario->password = Hash::make($request->ci_padre_tutor);
+        $nuevo_usuario->tipo = 'TUTOR';
+        $nuevo_usuario->foto = 'user_default.png';
+        $nuevo_usuario->codigo = $nro_codigo;
+        $nuevo_usuario->estado = 1;
+        $nuevo_usuario->save();
+
+        // usuario madre
+        if ($request->ci_madre && $request->nom_madre && $request->app_madre && $request->apm_madre) {
+            $nombre_tutor = UserController::nombreUsuario($request->nom_padre_tutor, $request->app_padre_tutor, $request->apm_padre_tutor);
+            $nro_codigo = UserController::getCodigoUsuario("TUTOR");
+            $nombre_tutor = $nro_codigo . $nombre_tutor;
+            $nuevo_usuario = new User();
+            $nuevo_usuario->name = $nombre_tutor;
+            $nuevo_usuario->password = Hash::make($request->ci_padre_tutor);
+            $nuevo_usuario->tipo = 'TUTOR';
+            $nuevo_usuario->foto = 'user_default.png';
+            $nuevo_usuario->codigo = $nro_codigo;
+            $nuevo_usuario->estado = 1;
+            $nuevo_usuario->save();
+        }
+
         $estudiante->user_id = $nuevo_usuario->id;
 
         $estudiante->save();
@@ -74,12 +92,12 @@ class EstudianteController extends Controller
         return redirect()->route('estudiantes.index')->with('bien', 'Registro realizado con éxito');
     }
 
-    public function edit(estudiante $usuario)
+    public function edit(Estudiante $usuario)
     {
         return view('estudiantes.edit', compact('usuario'));
     }
 
-    public function update(estudiante $usuario, EstudianteUpdateRequest $request)
+    public function update(Estudiante $usuario, EstudianteUpdateRequest $request)
     {
         $usuario->update(array_map('mb_strtoupper', $request->except('foto')));
 
@@ -99,17 +117,69 @@ class EstudianteController extends Controller
         }
 
         $usuario->user->save();
-        $usuario->save();
 
+        // usuario tutor
+        if (!$usuario->user_tutor_id || $usuario->user_tutor_id == NULL || $usuario->user_tutor_id == 0) {
+            $nombre_tutor = UserController::nombreUsuario($request->nom_padre_tutor, $request->app_padre_tutor, $request->apm_padre_tutor);
+            $nro_codigo = UserController::getCodigoUsuario("TUTOR");
+            $nombre_tutor = $nro_codigo . $nombre_tutor;
+            $nuevo_usuario = new User();
+            $nuevo_usuario->name = $nombre_tutor;
+            $nuevo_usuario->password = Hash::make($request->ci_padre_tutor);
+            $nuevo_usuario->tipo = 'TUTOR';
+            $nuevo_usuario->foto = 'user_default.png';
+            $nuevo_usuario->codigo = $nro_codigo;
+            $nuevo_usuario->estado = 1;
+            $nuevo_usuario->save();
+            $usuario->user_tutor_id = $nuevo_usuario->id;
+        }
+        if (!$usuario->user_madre_id || $usuario->user_madre_id == NULL || $usuario->user_madre_id == 0) {
+            // usuario madre
+            if ($request->ci_madre && $request->nom_madre && $request->app_madre) {
+                $nombre_tutor = UserController::nombreUsuario($request->nom_madre, $request->app_madre, $request->apm_madre);
+                $nro_codigo = UserController::getCodigoUsuario("TUTOR");
+                $nombre_tutor = $nro_codigo . $nombre_tutor;
+                $nuevo_usuario = new User();
+                $nuevo_usuario->name = $nombre_tutor;
+                $nuevo_usuario->password = Hash::make($request->ci_padre_tutor);
+                $nuevo_usuario->tipo = 'TUTOR';
+                $nuevo_usuario->foto = 'user_default.png';
+                $nuevo_usuario->codigo = $nro_codigo;
+                $nuevo_usuario->estado = 1;
+                $nuevo_usuario->save();
+                $usuario->user_madre_id = $nuevo_usuario->id;
+            }
+        }
+
+        $usuario->save();
         return redirect()->route('estudiantes.index')->with('bien', 'Usuario modificado con éxito');
     }
 
-    public function show(estudiante $usuario)
+    public function show(Estudiante $usuario)
     {
         return 'mostrar usuario';
     }
 
-    public function destroy(estudiante $usuario)
+    public function info_tutor(Estudiante $estudiante)
+    {
+        return view('estudiantes.info_tutor', compact("estudiante"));
+    }
+
+    public function formulario(Estudiante $estudiante)
+    {
+        $pdf = PDF::loadView('estudiantes.formulario', compact('estudiante'))->setPaper('legal', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 8, array(0, 0, 0));
+
+        return $pdf->stream('FormularioEstudiante.pdf');
+    }
+
+    public function destroy(Estudiante $usuario)
     {
         $usuario->estado = 0;
         $usuario->save();

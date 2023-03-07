@@ -19,12 +19,12 @@
     </a>
 </li>
 
-<li class="nav-item">
+{{-- <li class="nav-item">
     <a href="{{ route('asistencias.index') }}" class="nav-link {{ request()->is('asistencias*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-list-alt"></i>
         <p>Asistencias</p>
     </a>
-</li>
+</li> --}}
 
 <li class="nav-item @if(request()->is('materias*') || request()->is('areas*') || request()->is('campos*') || request()->is('nivels*') || request()->is('grados*'))menu-is-opening menu-open active @endif">
     <a href="#" class="nav-link">
@@ -56,13 +56,13 @@
 <li class="nav-item @if(request()->is('inscripcions*') || request()->is('paralelos*'))menu-is-opening menu-open active @endif">
     <a href="#" class="nav-link">
         <i class="nav-icon far fa-list-alt"></i>
-        <p>Inscripcions <i class="fas fa-angle-left right"></i></p>
+        <p>Inscripciones <i class="fas fa-angle-left right"></i></p>
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
             <a href="{{ route('inscripcions.index') }}" class="nav-link @if(request()->is('inscripcions*'))active @endif">
                 <i class="nav-icon far fa-circle"></i>
-                <p>Inscripcions</p>
+                <p>Inscripciones</p>
             </a>
         </li>
         <li class="nav-item">
@@ -74,7 +74,7 @@
     </ul>
 </li>
 
-<li class="nav-item @if(request()->is('pago_estudiantes*') || request()->is('plan_pagos*'))menu-is-opening menu-open active @endif">
+{{-- <li class="nav-item @if(request()->is('pago_estudiantes*') || request()->is('plan_pagos*'))menu-is-opening menu-open active @endif">
     <a href="#" class="nav-link">
         <i class="nav-icon far fa-list-alt"></i>
         <p>Pagos <i class="fas fa-angle-left right"></i></p>
@@ -93,7 +93,7 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 
 
 <li class="nav-item">

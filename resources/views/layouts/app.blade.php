@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>WEBSAF</title>
+    <title>UEACADEMICO</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('template/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css') }}">
@@ -249,7 +249,7 @@
         <input type="hidden" name="token" id="token" value="{{ csrf_token() }}">
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; {{ date('Y') }} WEBSAF</strong>
+            <strong>Copyright &copy; {{ date('Y') }} UEACADEMICO</strong>
             Todos los derechos reservados.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0

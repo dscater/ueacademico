@@ -58,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('profesors/store', 'ProfesorController@store')->name('profesors.store');
 
+    Route::get('profesors/formulario/{profesor}', 'ProfesorController@formulario')->name('profesors.formulario');
+
     Route::get('profesors/edit/{usuario}', 'ProfesorController@edit')->name('profesors.edit');
 
     Route::put('profesors/update/{usuario}', 'ProfesorController@update')->name('profesors.update');
@@ -86,11 +88,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profesor_materias/getInfoMateriasAsignadas/{profesor}', 'ProfesorMateriaController@getInfoMateriasAsignadas')->name('profesor_materias.getInfoMateriasAsignadas');
 
     // ESTUDIANTES
+    Route::get('estudiantes/info_tutor/{estudiante}', 'EstudianteController@info_tutor')->name('estudiantes.info_tutor');
+
     Route::get('estudiantes', 'EstudianteController@index')->name('estudiantes.index');
 
     Route::get('estudiantes/create', 'EstudianteController@create')->name('estudiantes.create');
 
     Route::post('estudiantes/store', 'EstudianteController@store')->name('estudiantes.store');
+
+    Route::get('estudiantes/formulario/{estudiante}', 'EstudianteController@formulario')->name('estudiantes.formulario');
 
     Route::get('estudiantes/edit/{usuario}', 'EstudianteController@edit')->name('estudiantes.edit');
 

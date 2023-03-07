@@ -113,50 +113,6 @@
         console.log($(this).attr('data-url'));
         $('#formEliminar').prop('action',url);
     });
-
-    // DEVOLUCIÓN PRESTAMO
-    $(document).on('click','table.data-table2 tbody tr td.btns-opciones a.ir-evaluacion',function(e){
-        e.preventDefault();
-        let url = $(this).attr('data-url');
-        let id = $(this).attr('data-id');
-
-        $.ajax({
-            type: "GET",
-            url: $('#urlInfoPrestamo').val(),
-            data: {
-                id : id
-            },
-            dataType: "json",
-            success: function (response) {
-                $('#mensaje_devolucion').html(`
-                    <b>Fecha préstamo:</b> ${response.prestamo.fecha_registro}<br>
-                    <hr>
-                    <b>Título:</b> ${response.libro.titulo}<br>
-                    <b>Tipo:</b> ${response.libro.tipo}<br>
-                    <b>Autor:</b> ${response.autor.nombre}<br>
-                    <b>Editorial:</b> ${response.editorial.nombre}<br>
-                    <b>Volumen:</b> ${response.volumen.nombre}
-                    <hr>
-                    <b>Nombre Lector:</b> ${response.lector.nombre} ${response.lector.apellidos}<br>
-                    <b>C.I.:</b> ${response.lector.ci} ${response.lector.ci_exp}<br>
-                    <b>Celular:</b> ${response.lector.cel}<br>
-                    `);
-                    $('#modal-devolucion').modal('show');
-            }
-        });
-
-        $('#formRegistraDevolucion').attr('action',url);
-
-    });
-
-    $('#btnRegistraDevolucion').click(function(){
-        $('#formRegistraDevolucion').submit();
-    });
-
-    $('#btnEliminar').click(function(){
-        $('#formEliminar').submit();
-    });
-
 </script>
 <script src="{{asset('js/home.js')}}"></script>
 <script src="{{asset('js/reloj.js')}}"></script>

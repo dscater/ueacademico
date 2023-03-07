@@ -10,14 +10,47 @@ class UserController extends Controller
 {
     public static function nombreUsuario($nom, $apep, $apem)
     {
+        $nombre_user = "";
         //determinando el nombre de usuario inicial del 1er_nombre+apep+tipoUser
         $nombre_user = substr(mb_strtoupper($nom), 0, 1); //inicial 1er_nombre
         $nombre_user .= substr(mb_strtoupper($apep), 0, 1); //inicial 1er_nombre
         if ($apem) {
             $nombre_user .= substr(mb_strtoupper($apem), 0, 1); //inicial 1er_nombre
         }
-
         return $nombre_user;
+    }
+
+    public static function getCodigoUsuario($tipo)
+    {
+        // obtener el código incremental
+        $ultimo_usuario = User::where("tipo", $tipo)->where("id", "!=", 1)->get()->last();
+
+        $nro_codigo = 100001;
+        switch ($tipo) {
+            case 'ADMINISTRADOR':
+                $nro_codigo = 100001;
+                break;
+            case 'SECRETARIA ACADÉMICA':
+                $nro_codigo = 100001;
+                break;
+            case 'PROFESOR':
+                $nro_codigo = 200001;
+                break;
+            case 'ESTUDIANTE':
+                $nro_codigo = 500001;
+                break;
+            case 'TUTOR':
+                $nro_codigo = 100001;
+                break;
+            default:
+                $nro_codigo = 100001;
+                break;
+        }
+
+        if ($ultimo_usuario) {
+            $nro_codigo = (int)$ultimo_usuario->codigo +  1;
+        }
+        return $nro_codigo;
     }
 
     // VISTA CONFIGURACIÓN DE USUARIO

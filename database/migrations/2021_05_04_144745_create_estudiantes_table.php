@@ -65,16 +65,20 @@ class CreateEstudiantesTable extends Migration
             $table->string('desc_llega');
 
             $table->string('ci_padre_tutor');
-            $table->string('ap_padre_tutor');
+            $table->string('app_padre_tutor');
+            $table->string('apm_padre_tutor')->nullable();
             $table->string('nom_padre_tutor');
+            $table->unsignedBigInteger('user_tutor_id')->nullable();
             $table->string('idioma_padre_tutor');
             $table->string('ocupacion_padre_tutor');
             $table->string('grado_padre_tutor');
             $table->string('parentezco_padre_tutor')->nullable();
 
             $table->string('ci_madre')->nullable();
-            $table->string('ap_madre')->nullable();
+            $table->string('app_madre')->nullable();
+            $table->string('apm_madre')->nullable();
             $table->string('nom_madre')->nullable();
+            $table->unsignedBigInteger('user_madre_id')->nullable();
             $table->string('idioma_madre')->nullable();
             $table->string('ocupacion_madre')->nullable();
             $table->string('grado_madre')->nullable();

@@ -284,6 +284,10 @@ class ProfesorController extends Controller
         return 'mostrar usuario';
     }
 
+    public function formulario(Profesor $profesor){
+
+    }
+
     public function destroy(Profesor $usuario)
     {
         $usuario->estado = 0;
