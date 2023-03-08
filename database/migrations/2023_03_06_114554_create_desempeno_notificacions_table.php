@@ -15,6 +15,12 @@ class CreateDesempenoNotificacionsTable extends Migration
     {
         Schema::create('desempeno_notificacions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("desempeno_id");
+            $table->date("fecha");
+            $table->time("hora");
+            $table->text("desempeno");
+            $table->string("valoracion");
+            $table->date("fecha_registro");
             $table->timestamps();
         });
     }

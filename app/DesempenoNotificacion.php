@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class DesempenoNotificacion extends Model
 {
-    //
+    protected $fillable = [
+        "desempeno_id",
+        "fecha",
+        "hora",
+        "desempeno",
+        "valoracion",
+        "fecha_registro",
+    ];
 }

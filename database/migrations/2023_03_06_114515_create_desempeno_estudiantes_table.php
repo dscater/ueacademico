@@ -15,6 +15,14 @@ class CreateDesempenoEstudiantesTable extends Migration
     {
         Schema::create('desempeno_estudiantes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("inscripcion_id");
+            $table->unsignedBigInteger("materia_id");
+            $table->unsignedBigInteger("estudiante_id");
+            $table->text("desempeno");
+            $table->string("valoracion", 255);
+            $table->date("fecha");
+            $table->text("observacion")->nullable();
+            $table->date("fecha_registro");
             $table->timestamps();
         });
     }

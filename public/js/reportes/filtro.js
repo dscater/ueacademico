@@ -93,14 +93,12 @@ function boleta_calificaciones() {
     var gestion = $('#m_boleta_calificaciones #gestion').parents('.form-group');
     var trimestre = $('#m_boleta_calificaciones #trimestre').parents('.form-group');
 
-    nivel.find('select').change(function () {
-        let valor = nivel.find('select').val();
-        if (valor != 'NIVEL INICIAL') {
-            grado.find('select').html(grados);
-        } else {
-            grado.find('select').html(grados_inicial);
-        }
-    });
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+    } else {
+        grado.find('select').html(grados_inicial);
+    }
 
     estudiante.hide();
     $('#m_boleta_calificaciones select#filtro').change(function () {
@@ -121,16 +119,14 @@ function centralizador_calificaciones() {
     var nivel = $('#m_centralizador_calificacions #nivel').parents('.form-group');
     var grado = $('#m_centralizador_calificacions #grado').parents('.form-group');
 
-    nivel.find('select').change(function () {
-        let valor = nivel.find('select').val();
-        if (valor != 'NIVEL INICIAL') {
-            grado.find('select').html(grados);
-            grado.find('select').append('<option value="todos">Todos</option>');
-        } else {
-            grado.find('select').html(grados_inicial);
-            grado.find('select').append('<option value="todos">Todos</option>');
-        }
-    });
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+        grado.find('select').append('<option value="todos">Todos</option>');
+    } else {
+        grado.find('select').html(grados_inicial);
+        grado.find('select').append('<option value="todos">Todos</option>');
+    }
 }
 
 function historial_academico() {
@@ -141,14 +137,12 @@ function historial_academico() {
     var turno = $('#m_historial_academico #turno').parents('.form-group');
     var gestion = $('#m_historial_academico #gestion').parents('.form-group');
 
-    nivel.find('select').change(function () {
-        let valor = nivel.find('select').val();
-        if (valor != 'NIVEL INICIAL') {
-            grado.find('select').html(grados);
-        } else {
-            grado.find('select').html(grados_inicial);
-        }
-    });
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+    } else {
+        grado.find('select').html(grados_inicial);
+    }
 }
 
 function ingresos_economicos() {

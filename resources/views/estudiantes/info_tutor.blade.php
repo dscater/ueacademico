@@ -48,6 +48,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if ($estudiante->user_tutor)
                                 <div class="col-md-12">
                                     <h4>Tutor</h4>
                                     <table class="table table-bordered">
@@ -64,6 +65,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @endif
                                 @if ($estudiante->user_madre)
                                     <div class="col-md-12">
                                         <h4>Madre</h4>

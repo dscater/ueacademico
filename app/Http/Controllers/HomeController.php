@@ -68,11 +68,6 @@ class HomeController extends Controller
             $materias = count(ProfesorMateria::where('profesor_id', Auth::user()->profesor->id)
                 ->where('gestion', date('Y'))
                 ->get());
-
-            $fecha_gestion = date('Y');
-            $asistencias = count(Asistencia::where('user_id', Auth::user()->id)
-                ->where('fecha', 'LIKE', "$fecha_gestion%")
-                ->get());
         }
 
         return view('home', compact('administrativos', 'profesors', 'estudiantes', 'array_gestiones', 'array_paralelos', 'materias', 'asistencias'));

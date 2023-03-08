@@ -223,7 +223,7 @@ class ReporteController extends Controller
                         $administrativos = Administrativo::select('administrativos.*')
                             ->where('administrativos.id', $a_p[0])
                             ->where('administrativos.estado', 1)
-                            ->where('administrativos.user_id', NULL)
+                            // ->where('administrativos.user_id', NULL)
                             ->orderBy('administrativos.nombre', 'ASC')
                             ->get();
                         $profesors = [];

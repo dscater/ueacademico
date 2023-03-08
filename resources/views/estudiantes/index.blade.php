@@ -53,8 +53,10 @@
                                     <td>{{$estudiante->nro_doc}} {{$estudiante->ci_exp}}</td>
                                     <td>{{$estudiante->fono_dir}}</td>
                                     <td>{{$estudiante->provincia}}, {{$estudiante->zona_dir}} {{$estudiante->municipio_dir}} {{$estudiante->avenida_dir}} {{$estudiante->localidad_dir}} {{$estudiante->nro_dir}}</td>
-                                    <td>
-                                        {{$estudiante->ap_padre_tutor}} {{$estudiante->nom_padre_tutor}}<br/>
+                                    <td>{{$estudiante->full_name_tutor}}<br/>
+                                        @if($estudiante->full_name_madre != "")
+                                        {{$estudiante->full_name_madre}}<br/>
+                                        @endif
                                         <a href="{{route('estudiantes.info_tutor',$estudiante->id)}}">Ver más...</a>
                                     </td>
                                     <td class="btns-opciones">

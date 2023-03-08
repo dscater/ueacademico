@@ -45,11 +45,14 @@ class Estudiante extends Model
 
     public function getFullNameMadreAttribute()
     {
-        $full_name = $this->nom_madre . ' ' . $this->app_madre;
-        if ($this->materno) {
-            $full_name .= $this->apm_madre;
+        if ($this->nom_madre && $this->app_madre) {
+            $full_name = $this->nom_madre . ' ' . $this->app_madre;
+            if ($this->materno) {
+                $full_name .= $this->apm_madre;
+            }
+            return $full_name;
         }
-        return $full_name;
+        return "";
     }
 
     public function user()

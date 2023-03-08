@@ -60,9 +60,7 @@
                                     <td><img src="{{asset('imgs/users/'.$usuario->foto)}}" alt="Foto" class="img-table"></td>
                                     <td>{{$usuario->user? $usuario->user->tipo:''}}</td>
                                     <td class="btns-opciones">
-                                        @if(!$usuario->user)
                                         <a href="{{route('reportes.kardex_personal')}}?filtro=individual&personal={{$usuario->id}}-a" class="evaluar" target="_blank"><i class="far fa-list-alt" data-toggle="tooltip" data-placement="left" title="Kardex"></i></a>
-                                        @endif
 
                                         <a href="{{route('administrativos.edit',$usuario->id)}}" class="modificar"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Modificar"></i></a>
     

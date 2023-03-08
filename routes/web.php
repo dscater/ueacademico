@@ -68,6 +68,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('profesors/asistencias/{profesor}', 'ProfesorController@asistencias')->name('profesors.asistencias');
 
+    // ACTIVIDAD PROFESORES
+    Route::get('actividad_profesors/{profesor}', 'ActividadProfesorController@index')->name('actividad_profesors.index');
+
+    Route::get('actividad_profesors/getActividadesProfesor/{profesor}', 'ActividadProfesorController@getActividadesProfesor')->name('actividad_profesors.getActividadesProfesor');
+
+    Route::post('actividad_profesors/store/{profesor}', 'ActividadProfesorController@store')->name('actividad_profesors.store');
+
+    Route::put('actividad_profesors/update/{actividad_profesor}', 'ActividadProfesorController@update')->name('actividad_profesors.update');
+
+    Route::delete('actividad_profesors/destroy/{actividad_profesor}', 'ActividadProfesorController@destroy')->name('actividad_profesors.destroy');
+    
+
     // PROFESORES-MATERIAS
     Route::get('profesor_materias/{profesor}', 'ProfesorMateriaController@index')->name('profesor_materias.index');
 

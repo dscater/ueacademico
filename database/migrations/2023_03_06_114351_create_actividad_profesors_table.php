@@ -15,6 +15,11 @@ class CreateActividadProfesorsTable extends Migration
     {
         Schema::create('actividad_profesors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->date("fecha");
+            $table->text("descripción");
+            $table->text("observacion")->nullable();
+            $table->date("fecha_registro");
             $table->timestamps();
         });
     }

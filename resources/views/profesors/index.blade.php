@@ -79,8 +79,6 @@
                                     <td><img src="{{asset('imgs/users/'.$usuario->foto)}}" alt="Foto" class="img-table"></td>
                                     <td class="text-center"><a href="{{route('profesor_materias.index',$usuario->id)}}" class="btn btn-info bn-sm" data-toggle="tooltip" title="{{$titulo}}">{{count($usuario->materias)}} Materias</a></td>
                                     <td class="btns-opciones">
-                                        <a href="{{route('profesors.formulario',$usuario->id)}}" class="ir-evaluacion" target="_blank"><i class="far fa-pdf" data-toggle="tooltip" data-placement="left" title="Formulario"></i></a>
-
                                         <a href="{{route('reportes.kardex_personal')}}?filtro=individual&personal={{$usuario->id}}-p" class="evaluar" target="_blank"><i class="far fa-list-alt" data-toggle="tooltip" data-placement="left" title="Kardex"></i></a>
 
                                         <a href="{{route('profesors.edit',$usuario->id)}}" class="modificar"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Modificar"></i></a>
