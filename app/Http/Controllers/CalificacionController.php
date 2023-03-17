@@ -95,7 +95,7 @@ class CalificacionController extends Controller
 
         $calificacions = Calificacion::select('calificacions.*')
             ->join('inscripcions', 'inscripcions.id', '=', 'calificacions.inscripcion_id')
-            ->where('calificacions.materia_id', $materia)
+            ->where('calificacions.materia_id', $profesor_materia->materia_id)
             ->where('inscripcions.nivel', $profesor_materia->nivel)
             ->where('inscripcions.grado', $profesor_materia->grado)
             ->where('inscripcions.paralelo_id', $profesor_materia->paralelo_id)

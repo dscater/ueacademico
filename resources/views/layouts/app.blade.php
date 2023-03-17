@@ -234,6 +234,9 @@
                         @if(Auth::user()->tipo == 'SECRETARIA ACADÉMICA')
                         @include('includes.menu.menu_secretaria')
                         @endif
+                        @if(Auth::user()->tipo == 'TUTOR')
+                        @include('includes.menu.menu_tutor')
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

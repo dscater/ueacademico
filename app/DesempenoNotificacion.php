@@ -13,5 +13,7 @@ class DesempenoNotificacion extends Model
         "desempeno",
         "valoracion",
         "fecha_registro",
+        "user_id",
+        "visto"
     ];
 }

@@ -17,6 +17,8 @@ let select_turno = $('#select_turno');
 let gestion = $('#gestion');
 
 $(document).ready(function () {
+    carga_grados();
+    obtiene_materias();
     select_nivel.change(function () {
         carga_grados();
         obtiene_materias();

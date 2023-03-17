@@ -77,7 +77,7 @@ class EstudianteController extends Controller
             $nombre_tutor = $nro_codigo . $nombre_tutor;
             $nuevo_usuario = new User();
             $nuevo_usuario->name = $nombre_tutor;
-            $nuevo_usuario->password = Hash::make($request->ci_padre_tutor);
+            $nuevo_usuario->password = Hash::make($request->ci_madre);
             $nuevo_usuario->tipo = 'TUTOR';
             $nuevo_usuario->foto = 'user_default.png';
             $nuevo_usuario->codigo = $nro_codigo;

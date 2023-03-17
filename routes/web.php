@@ -78,7 +78,27 @@ Route::middleware(['auth'])->group(function () {
     Route::put('actividad_profesors/update/{actividad_profesor}', 'ActividadProfesorController@update')->name('actividad_profesors.update');
 
     Route::delete('actividad_profesors/destroy/{actividad_profesor}', 'ActividadProfesorController@destroy')->name('actividad_profesors.destroy');
-    
+
+    // DESEMPEÑO ESTUDIANTES
+    Route::get('desempeno_estudiantes', 'DesempenoEstudianteController@index')->name('desempeno_estudiantes.index');
+
+    Route::get('desempeno_estudiantes/create', 'DesempenoEstudianteController@create')->name('desempeno_estudiantes.create');
+
+    Route::post('desempeno_estudiantes/store', 'DesempenoEstudianteController@store')->name('desempeno_estudiantes.store');
+
+    Route::get('desempeno_estudiantes/edit/{desempeno_estudiante}', 'DesempenoEstudianteController@edit')->name('desempeno_estudiantes.edit');
+
+    Route::put('desempeno_estudiantes/update/{desempeno_estudiante}', 'DesempenoEstudianteController@update')->name('desempeno_estudiantes.update');
+
+    Route::delete('desempeno_estudiantes/destroy/{desempeno_estudiante}', 'DesempenoEstudianteController@destroy')->name('desempeno_estudiantes.destroy');
+
+
+    // DESEMPEÑO ESTUDIANTES CHAT
+    Route::get('desempeno_estudiantes/chat_desempeno/getMensajes', 'ChatDesempenoController@getMensajes')->name('chat_desempeno.getMensajes');
+    Route::get('desempeno_estudiantes/chat_desempeno/getNuevosMensajes', 'ChatDesempenoController@getNuevosMensajes')->name('chat_desempeno.getNuevosMensajes');
+
+    Route::get('desempeno_estudiantes/chat_desempeno/{desempeno_estudiante}', 'ChatDesempenoController@index')->name('chat_desempeno.index');
+    Route::post('desempeno_estudiantes/chat_desempeno/{desempeno_estudiante}', 'ChatDesempenoController@store')->name('chat_desempeno.store');
 
     // PROFESORES-MATERIAS
     Route::get('profesor_materias/{profesor}', 'ProfesorMateriaController@index')->name('profesor_materias.index');
@@ -175,6 +195,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('paralelos/destroy/{paralelo}', 'ParaleloController@destroy')->name('paralelos.destroy');
 
     // INSCRIPCIONES
+    Route::get('inscripcions/getEstudianteProfesorMateria', 'InscripcionController@getEstudianteProfesorMateria')->name('inscripcions.getEstudianteProfesorMateria');
+
     Route::get('inscripcions', 'InscripcionController@index')->name('inscripcions.index');
 
     Route::get('inscripcions/create', 'InscripcionController@create')->name('inscripcions.create');

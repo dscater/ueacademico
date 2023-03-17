@@ -13,7 +13,7 @@ class ProfesorMateriaController extends Controller
 {
     public function index(Profesor $profesor)
     {
-        $paralelos = paralelo::all();
+        $paralelos = Paralelo::all();
         $array_paralelos[''] = 'Seleccione...';
         foreach ($paralelos as $value) {
             $array_paralelos[$value->id] = $value->paralelo;
@@ -23,8 +23,15 @@ class ProfesorMateriaController extends Controller
 
     public function materias_asignadas(Profesor $profesor)
     {
-        $gestion_min = Inscripcion::min('gestion');
-        $gestion_max = Inscripcion::max('gestion');
+        $gestion_min = ProfesorMateria::min('fecha_registro');
+        $gestion_max = ProfesorMateria::max('fecha_registro');
+
+        if ($gestion_min) {
+            $gestion_min = date("Y", strtotime($gestion_min));
+        }
+        if ($gestion_max) {
+            $gestion_max = date("Y", strtotime($gestion_max));
+        }
 
         $array_gestiones = [];
         if ($gestion_min) {
@@ -32,7 +39,10 @@ class ProfesorMateriaController extends Controller
             for ($i = (int)$gestion_min; $i <= (int)$gestion_max; $i++) {
                 $array_gestiones[$i] = $i;
             }
+        } else {
+            $array_gestiones[date("Y")] = date("Y");
         }
+
         return view('profesors.asignacion_materias', compact('profesor', 'array_gestiones'));
     }
 

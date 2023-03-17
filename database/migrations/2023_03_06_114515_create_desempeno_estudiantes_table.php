@@ -22,6 +22,7 @@ class CreateDesempenoEstudiantesTable extends Migration
             $table->string("valoracion", 255);
             $table->date("fecha");
             $table->text("observacion")->nullable();
+            $table->unsignedBigInteger("user_id");
             $table->date("fecha_registro");
             $table->timestamps();
         });

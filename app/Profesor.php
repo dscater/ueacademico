@@ -17,6 +17,18 @@ class Profesor extends Model
         'user_id', 'estado',
     ];
 
+
+    protected $appends = ["full_name"];
+
+    public function getFullNameAttribute()
+    {
+        $full_name = $this->nombre . ' ' . $this->paterno;
+        if ($this->materno) {
+            $full_name .= $this->materno;
+        }
+        return $full_name;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

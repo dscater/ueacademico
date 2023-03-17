@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\inscripcion;
+use App\Inscripcion;
 use App\Estudiante;
 use App\Paralelo;
 use App\Materia;
 use App\Calificacion;
 use App\CalificacionTrimestre;
+use App\ProfesorMateria;
 use App\TrimestreActividad;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -16,7 +17,7 @@ class InscripcionController extends Controller
 {
     public function index()
     {
-        $inscripcions = inscripcion::where('status', 1)->get();
+        $inscripcions = Inscripcion::where('status', 1)->get();
         return view('inscripcions.index', compact('inscripcions'));
     }
 
@@ -97,7 +98,7 @@ class InscripcionController extends Controller
         return redirect()->route('inscripcions.index')->with('bien', 'Registro realizado con éxito');
     }
 
-    public function edit(inscripcion $inscripcion)
+    public function edit(Inscripcion $inscripcion)
     {
         $estudiantes = Estudiante::select('estudiantes.*')
             ->where('estudiantes.estado', 1)
@@ -117,18 +118,18 @@ class InscripcionController extends Controller
         return view('inscripcions.edit', compact('inscripcion', 'array_estudiantes', 'array_paralelos'));
     }
 
-    public function update(inscripcion $inscripcion, Request $request)
+    public function update(Inscripcion $inscripcion, Request $request)
     {
         $inscripcion->update(array_map('mb_strtoupper', $request->all()));
         return redirect()->route('inscripcions.index')->with('bien', 'Registro modificado con éxito');
     }
 
-    public function show(inscripcion $inscripcion)
+    public function show(Inscripcion $inscripcion)
     {
         return 'mostrar cargo';
     }
 
-    public function destroy(inscripcion $inscripcion)
+    public function destroy(Inscripcion $inscripcion)
     {
         $inscripcion->status = 0;
         $inscripcion->save();
@@ -144,14 +145,14 @@ class InscripcionController extends Controller
         $paralelo = $request->paralelo;
         $turno = $request->turno;
 
-        $inscripcions = inscripcion::where('status', 1)->get();
+        $inscripcions = Inscripcion::where('status', 1)->get();
 
         $paralelo = Paralelo::find($paralelo);
         $titulo = 'Total Estudiantes: ' . count($inscripcions);
         if ($filtro != 'todos') {
             if ($gestion != '' && $nivel != '' && $grado != '' && $paralelo != '' && $turno != '') {
                 $titulo = 'Total Estudiantes gestión ' . $gestion . ' - ' . $grado . 'º ' . $paralelo->paralelo . ' de ' . $nivel . ' Turno ' . $turno;
-                $inscripcions = inscripcion::where('gestion', $gestion)
+                $inscripcions = Inscripcion::where('gestion', $gestion)
                     ->where('nivel', $nivel)
                     ->where('grado', $grado)
                     ->where('paralelo_id', $paralelo->id)
@@ -183,5 +184,38 @@ class InscripcionController extends Controller
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
 
         return $pdf->stream('Formulario.pdf');
+    }
+
+    public function getEstudianteProfesorMateria(Request $request)
+    {
+        $materia_profesor = ProfesorMateria::find($request->materia);
+        $gestion = $materia_profesor->gestion;
+        $nivel = $materia_profesor->nivel;
+        $grado = $materia_profesor->grado;
+        $paralelo_id = $materia_profesor->paralelo_id;
+        $turno = $materia_profesor->turno;
+        $materia_id = $materia_profesor->materia_id;
+
+        $inscripcions = Inscripcion::select("inscripcions.*")
+            ->join("calificacions", "calificacions.inscripcion_id", "inscripcions.id")
+            ->where("gestion", $gestion)
+            ->where("nivel", $nivel)
+            ->where("grado", $grado)
+            ->where("paralelo_id", $paralelo_id)
+            ->where("turno", $turno)
+            ->where("inscripcions.status", 1)
+            ->where("calificacions.materia_id", $materia_id)
+            ->get();
+
+        $lista_options = '<option value="">Seleccione...</option>';
+        foreach ($inscripcions as $value) {
+            $lista_options .= '<option value="' . $value->id . '">' . $value->estudiante->full_name . '</option>';
+        }
+
+        return response()->JSON([
+            "inscripcions" => $inscripcions,
+            "lista_options" => $lista_options,
+            "materia_id" => $materia_id,
+        ]);
     }
 }
