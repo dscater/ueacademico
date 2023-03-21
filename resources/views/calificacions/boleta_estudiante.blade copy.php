@@ -31,7 +31,7 @@
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        {!! Form::open(['route' => 'reportes.boletin', 'method' => 'get', 'target' => '_blank', 'id' => 'formboleta_calificaciones']) !!}
+                        {!! Form::open(['route' => 'reportes.boleta_calificaciones', 'method' => 'get', 'target' => '_blank', 'id' => 'formboleta_calificaciones']) !!}
                         <div class="row">
                             <input type="hidden" name="filtro" value="individual">
                             <input type="hidden" name="estudiante" value="{{$estudiante->id}}">

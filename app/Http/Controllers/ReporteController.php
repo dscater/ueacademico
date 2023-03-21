@@ -20,6 +20,7 @@ use App\TrimestreActividad;
 use App\ProfesorMateria;
 use App\PagoEstudiante;
 use App\Asistencia;
+use App\DesempenoEstudiante;
 use Illuminate\Support\Facades\DB;
 
 
@@ -366,7 +367,7 @@ class ReporteController extends Controller
                             $calificacion = Calificacion::where('inscripcion_id', $inscripcion->id)
                                 ->where('materia_id', $materia->id)
                                 ->get()->first();
-                            $html .= '<div class="nota">' . $calificacion->nota_final . 'final</div>';
+                            $html .= '<div class="nota">' . $calificacion->nota_final . '</div>';
                             $html .= '</div>'; //fin notas
                             $html .= '<div class="contenedor_notas">';
                             $html .= '<div class="nota">' . $calificacion->estado . '</div>';
@@ -426,6 +427,151 @@ class ReporteController extends Controller
         $titulo = 'Boletín de Nota ' . $array_trimestre[$trimestre];
 
         return View('reportes.boleta_calificaciones', compact('inscripcions', 'array_trimestre', 'trimestre', 'html', 'titulo', 'gestion', 'array_html'));
+    }
+
+    public function boletin(Request $request)
+    {
+        $filtro = $request->filtro;
+        $estudiante = $request->estudiante;
+        $nivel = $request->nivel;
+        $grado = $request->grado;
+        $paralelo = $request->paralelo;
+        $turno = $request->turno;
+        $gestion = $request->gestion;
+        $inscripcions = Inscripcion::where('nivel', $nivel)
+            ->where('grado', $grado)
+            ->where('paralelo_id', $paralelo)
+            ->where('turno', $turno)
+            ->where('gestion', $gestion)
+            ->where('status', 1)
+            ->get();
+
+        if ($filtro != 'todos') {
+            $inscripcions = Inscripcion::where('nivel', $nivel)
+                ->where('grado', $grado)
+                ->where('paralelo_id', $paralelo)
+                ->where('turno', $turno)
+                ->where('gestion', $gestion)
+                ->where('estudiante_id', $estudiante)
+                ->where('status', 1)
+                ->get();
+        }
+
+        $html = '';
+        $datos = [];
+        $profesors = [];
+        $materias = Materia::select('materias.*')
+            ->join('materia_grados', 'materia_grados.materia_id', '=', 'materias.id')
+            ->join('areas', 'areas.id', '=', 'materias.area_id')
+            ->where('areas.tipo', 'HUMANÍSTICA')
+            ->where('materias.nivel', $nivel)
+            ->where('materia_grados.grado', $grado)
+            ->get();
+
+        foreach ($materias as $materia) {
+            foreach ($inscripcions as $inscripcion) {
+                $contador_notas = 0;
+                $suma_total = 0;
+                $profesor_materia = ProfesorMateria::where("materia_id", $materia->id)
+                    ->where('grado', $grado)
+                    ->where('paralelo_id', $paralelo)
+                    ->where('turno', $turno)
+                    ->where('gestion', $gestion)
+                    ->get()
+                    ->first();
+                $profesors[$materia->id] = $profesor_materia ? $profesor_materia->profesor->full_name : 'S/A';
+                $datos[$materia->id][$inscripcion->id] = [
+                    "nombre" => $inscripcion->estudiante->paterno . ' ' . $inscripcion->estudiante->materno . ' ' . $inscripcion->estudiante->nombre,
+                    "1" => 0,
+                    "obs1" => "",
+                    "2" => 0,
+                    "obs2" => "",
+                    "3" => 0,
+                    "obs3" => "",
+                    "final" => 0,
+                    "obs" => ""
+                ];
+
+                $calificacion1 = Calificacion::select("calificacion_trimestres.promedio_final")
+                    ->join("calificacion_trimestres", "calificacion_trimestres.calificacion_id", "=", "calificacions.id")
+                    ->where("calificacion_trimestres.trimestre", 1)
+                    ->where("inscripcion_id", $inscripcion->id)
+                    ->where("materia_id", $materia->id)
+                    ->get()
+                    ->first();
+                if ($calificacion1) {
+                    $datos[$materia->id][$inscripcion->id]["1"] = $calificacion1->promedio_final;
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["1"] = 0;
+                }
+                if ($datos[$materia->id][$inscripcion->id]["1"] <= 51) {
+                    $datos[$materia->id][$inscripcion->id]["obs1"] = "REPROBADO";
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["obs1"] = "APROBADO";
+                }
+
+                $calificacion2 = Calificacion::select("calificacion_trimestres.promedio_final")
+                    ->join("calificacion_trimestres", "calificacion_trimestres.calificacion_id", "=", "calificacions.id")
+                    ->where("calificacion_trimestres.trimestre", 2)
+                    ->where("inscripcion_id", $inscripcion->id)
+                    ->where("materia_id", $materia->id)
+                    ->get()
+                    ->first();
+                if ($calificacion2) {
+                    $datos[$materia->id][$inscripcion->id]["2"] = $calificacion2->promedio_final;
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["2"] = 0;
+                }
+                if ($datos[$materia->id][$inscripcion->id]["2"] <= 51) {
+                    $datos[$materia->id][$inscripcion->id]["obs2"] = "REPROBADO";
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["obs2"] = "APROBADO";
+                }
+
+                $calificacion3 = Calificacion::select("calificacion_trimestres.promedio_final")
+                    ->join("calificacion_trimestres", "calificacion_trimestres.calificacion_id", "=", "calificacions.id")
+                    ->where("calificacion_trimestres.trimestre", 3)
+                    ->where("inscripcion_id", $inscripcion->id)
+                    ->where("materia_id", $materia->id)
+                    ->get()
+                    ->first();
+                if ($calificacion3) {
+                    $datos[$materia->id][$inscripcion->id]["3"] = $calificacion3->promedio_final;
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["3"] = 0;
+                }
+                if ($datos[$materia->id][$inscripcion->id]["3"] <= 51) {
+                    $datos[$materia->id][$inscripcion->id]["obs3"] = "REPROBADO";
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["obs3"] = "APROBADO";
+                }
+
+
+                $calificacion_final = Calificacion::select("calificacions.nota_final", "calificacions.estado")
+                    ->where("inscripcion_id", $inscripcion->id)
+                    ->where("materia_id", $materia->id)
+                    ->get()
+                    ->first();
+                if ($calificacion_final) {
+                    $datos[$materia->id][$inscripcion->id]["final"] = $calificacion_final->nota_final;
+                    $datos[$materia->id][$inscripcion->id]["obs"] = $calificacion_final->estado;
+                } else {
+                    $datos[$materia->id][$inscripcion->id]["final"] = 0;
+                    $datos[$materia->id][$inscripcion->id]["obs"] = "REPROBADO";
+                }
+            }
+        }
+        $paralelo = Paralelo::find($paralelo)->paralelo;
+        $pdf = PDF::loadView('reportes.boletin', compact('inscripcions', 'materias', 'gestion', 'datos', 'grado', 'paralelo', 'profesors'))->setPaper('letter', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->stream('CentralizadorCalificacions.pdf');
     }
 
     public function centralizador_calificacions(Request $request)
@@ -497,8 +643,9 @@ class ReporteController extends Controller
                 }
             }
         }
+        $paralelo_id = $paralelo;
         $paralelo = Paralelo::find($paralelo)->paralelo;
-        $pdf = PDF::loadView('reportes.centralizador_calificacions', compact('filas_grados', 'nivel', 'paralelo', 'turno', 'gestion', 'array_grados', 'calificacions', 'inscripcions', 'observacions', 'array_materias'))->setPaper('legal', 'landscape');
+        $pdf = PDF::loadView('reportes.centralizador_calificacions', compact('filas_grados', 'nivel', 'paralelo', 'turno', 'gestion', 'array_grados', 'calificacions', 'inscripcions', 'observacions', 'array_materias', 'paralelo_id'))->setPaper('legal', 'landscape');
         // ENUMERAR LAS PÁGINAS USANDO CANVAS
         $pdf->output();
         $dom_pdf = $pdf->getDomPDF();
@@ -756,5 +903,222 @@ class ReporteController extends Controller
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
 
         return $pdf->stream('asistencias.pdf');
+    }
+
+    public function actividad_profesors(Request $request)
+    {
+        $filtro = $request->filtro;
+        $profesor = $request->profesor;
+        $gestion = $request->gestion;
+        $profesors = Profesor::where("estado", 1)->get();
+        if ($profesor != 'todos' && $filtro != 'todos') {
+            $profesors = Profesor::where("id", $profesor)->get();
+        }
+
+        $pdf = PDF::loadView('reportes.actividad_profesors', compact('profesors', 'gestion'))->setPaper('letter', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->stream('actividad_profesors.pdf');
+    }
+
+    public function desempeno_academico(Request $request)
+    {
+        $filtro = $request->filtro;
+        $estudiante = $request->estudiante;
+        $nivel = $request->nivel;
+        $grado = $request->grado;
+        $paralelo = $request->paralelo;
+        $turno = $request->turno;
+        $materia = $request->materia;
+        $gestion = $request->gestion;
+
+
+        $inscripcions = Inscripcion::where("nivel", $nivel)
+            ->where("grado", $grado)
+            ->where("paralelo_id", $paralelo)
+            ->where("turno", $turno)
+            ->where("gestion", $gestion)
+            ->where("status", 1)
+            ->get();
+
+        $desempeno_materia = [];
+        foreach ($inscripcions as $inscripcion) {
+            $desempeno_materia[$inscripcion->id] = DesempenoEstudiante::where("estudiante_id", $inscripcion->estudiante_id)->get();
+            if ($materia != "todos") {
+                $desempeno_materia[$inscripcion->id] = DesempenoEstudiante::where("estudiante_id", $inscripcion->estudiante_id)
+                    ->where("materia_id", $materia)->get();
+            }
+        }
+
+        $materia_id = $materia;
+        $pdf = PDF::loadView('reportes.desempeno_academico', compact('inscripcions', 'gestion', 'materia_id', 'desempeno_materia'))->setPaper('letter', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->stream('desempeno_academico.pdf');
+    }
+
+    public function notificacions(Request $request)
+    {
+        $filtro = $request->filtro;
+        $estudiante = $request->estudiante;
+        $nivel = $request->nivel;
+        $grado = $request->grado;
+        $paralelo = $request->paralelo;
+        $turno = $request->turno;
+        $materia = $request->materia;
+        $gestion = $request->gestion;
+
+
+        $inscripcions = Inscripcion::where("nivel", $nivel)
+            ->where("grado", $grado)
+            ->where("paralelo_id", $paralelo)
+            ->where("turno", $turno)
+            ->where("gestion", $gestion)
+            ->where("status", 1)
+            ->get();
+
+        $desempeno_materia = [];
+        foreach ($inscripcions as $inscripcion) {
+            $desempeno_materia[$inscripcion->id] = DesempenoEstudiante::where("estudiante_id", $inscripcion->estudiante_id)->get();
+            if ($materia != "todos") {
+                $desempeno_materia[$inscripcion->id] = DesempenoEstudiante::where("estudiante_id", $inscripcion->estudiante_id)
+                    ->where("materia_id", $materia)->get();
+            }
+        }
+
+        $materia_id = $materia;
+        $pdf = PDF::loadView('reportes.notificacions', compact('inscripcions', 'gestion', 'materia_id', 'desempeno_materia'))->setPaper('letter', 'portrait');
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->stream('notificacions.pdf');
+    }
+
+    public function grafico_inscripcions()
+    {
+        $usuarios = Administrativo::select('administrativos.*')
+            ->join('users', 'users.id', '=', 'administrativos.user_id')
+            ->where('users.estado', 1)
+            ->get();
+
+        $gestion_min = Profesor::min('fecha_registro');
+        $gestion_max = Profesor::max('fecha_registro');
+        $gestion_min = date('Y', strtotime($gestion_min));
+        $gestion_max = date('Y', strtotime($gestion_max));
+
+        $array_gestiones = [];
+        if ($gestion_min) {
+            $array_gestiones[''] = 'Seleccione...';
+            for ($i = (int)$gestion_min; $i <= (int)$gestion_max; $i++) {
+                $array_gestiones[$i] = $i;
+            }
+        }
+
+        $administrativos = Administrativo::select('administrativos.*')
+            ->where('administrativos.user_id', NULL)
+            ->where('administrativos.estado', 1)
+            ->get();
+
+        $profesors = Profesor::select('profesors.*')
+            ->where('profesors.estado', 1)
+            ->get();
+
+        $array_personal = [];
+        foreach ($administrativos as $value) {
+            $array_personal[$value->id . '-a'] = $value->paterno . ' ' . $value->materno . ' ' . $value->nombre;
+        }
+
+        foreach ($profesors as $value) {
+            $array_personal[$value->id . '-p'] = $value->paterno . ' ' . $value->materno . ' ' . $value->nombre;
+        }
+
+        $array_profesors['todos'] = 'Todos';
+        foreach ($profesors as $value) {
+            $array_profesors[$value->id] = $value->paterno . ' ' . $value->materno . ' ' . $value->nombre;
+        }
+
+        $paralelos = paralelo::all();
+        $array_paralelos[''] = 'Seleccione...';
+        foreach ($paralelos as $value) {
+            $array_paralelos[$value->id] = $value->paralelo;
+        }
+
+        $estudiantes = Estudiante::select('estudiantes.*')
+            ->where('estudiantes.estado', 1)
+            ->get();
+
+        $array_estudiantes[''] = 'Seleccione...';
+        foreach ($estudiantes as $value) {
+            $array_estudiantes[$value->id] = $value->nombre . ' ' . $value->paterno . ' ' . $value->materno;
+        }
+
+        $gestion_min = Inscripcion::min('gestion');
+        $gestion_max = Inscripcion::max('gestion');
+
+        $array_gestiones_insc = [];
+        if ($gestion_min) {
+            $array_gestiones_insc[''] = 'Seleccione...';
+            for ($i = (int)$gestion_min; $i <= (int)$gestion_max; $i++) {
+                $array_gestiones_insc[$i] = $i;
+            }
+        }
+
+        return view('reportes.grafico_inscripcions', compact('usuarios', 'array_gestiones', 'array_gestiones_insc', 'array_personal', 'array_paralelos', 'array_estudiantes', 'array_profesors'));
+    }
+
+    public function grafico_inscripcions_datos(Request $request)
+    {
+        $filtro = $request->filtro;
+        $nivel = $request->nivel;
+        $grado = $request->grado;
+        $paralelo = $request->paralelo;
+        $turno = $request->turno;
+        $gestion = $request->gestion;
+
+        $grados = [1, 2, 3, 4, 5, 6];
+        $datos = [["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0], ["6", 0]];
+        if ($filtro == "grado" && $grado != 'todos') {
+            $grados = [$grado];
+            $datos = [[$grado, 0]];
+        }
+        foreach ($grados as $value) {
+            $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->get());
+            if ($filtro == 'nivel' && $nivel != 'todos') {
+                $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->where("nivel", $nivel)->get());
+            }
+            if ($filtro == 'paralelo' && $paralelo != 'todos') {
+                $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->where("paralelo_id", $paralelo)->get());
+            }
+            if ($filtro == 'paralelo' && $paralelo != 'todos') {
+                $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->where("paralelo_id", $paralelo)->get());
+            }
+            if ($filtro == 'turno' && $turno != 'todos') {
+                $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->where("turno", $turno)->get());
+            }
+            if ($filtro == 'gestion' && $gestion != 'todos') {
+                $total_inscripcios = count(Inscripcion::where("status", 1)->where("grado", $value)->where("gestion", $gestion)->get());
+            }
+            $datos[(int)$value - 1][1] = $total_inscripcios;
+        }
+
+
+        return response()->JSON($datos);
     }
 }

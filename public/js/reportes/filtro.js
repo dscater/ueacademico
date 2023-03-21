@@ -15,9 +15,13 @@ $(document).ready(function () {
     personal();
     kardex_personal();
     boleta_calificaciones();
+    boletin();
     centralizador_calificaciones();
     historial_academico();
     ingresos_economicos();
+    actividad_profesors();
+    desempeno_academico();
+    notificacions();
 });
 
 function usuarios() {
@@ -31,6 +35,22 @@ function usuarios() {
                 break;
             case 'tipo':
                 tipo.show();
+                break;
+        }
+    });
+}
+
+function actividad_profesors() {
+    var profesor = $('#m_actividad_profesors #profesor').parents('.form-group');
+    profesor.hide();
+    $('#m_actividad_profesors select#filtro').change(function () {
+        let filtro = $(this).val();
+        switch (filtro) {
+            case 'todos':
+                profesor.hide();
+                break;
+            case 'profesor':
+                profesor.show();
                 break;
         }
     });
@@ -111,6 +131,128 @@ function boleta_calificaciones() {
             case 'individual':
                 estudiante.show();
                 break;
+        }
+    });
+}
+function boletin() {
+    var estudiante = $('#m_boletin #estudiante').parents('.form-group');
+    var nivel = $('#m_boletin #nivel').parents('.form-group');
+    var grado = $('#m_boletin #grado').parents('.form-group');
+    var paralelo = $('#m_boletin #paralelo').parents('.form-group');
+    var turno = $('#m_boletin #turno').parents('.form-group');
+    var gestion = $('#m_boletin #gestion').parents('.form-group');
+    var trimestre = $('#m_boletin #trimestre').parents('.form-group');
+
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+    } else {
+        grado.find('select').html(grados_inicial);
+    }
+
+    estudiante.hide();
+    $('#m_boletin select#filtro').change(function () {
+        let filtro = $(this).val();
+        switch (filtro) {
+            case 'todos':
+                estudiante.hide();
+                estudiante.find('input').removeAttr('required');
+                break;
+            case 'individual':
+                estudiante.show();
+                break;
+        }
+    });
+}
+function desempeno_academico() {
+    var estudiante = $('#m_desempeno_academico #estudiante').parents('.form-group');
+    var nivel = $('#m_desempeno_academico #nivel').parents('.form-group');
+    var grado = $('#m_desempeno_academico #grado').parents('.form-group');
+    var paralelo = $('#m_desempeno_academico #paralelo').parents('.form-group');
+    var turno = $('#m_desempeno_academico #turno').parents('.form-group');
+    var gestion = $('#m_desempeno_academico #gestion').parents('.form-group');
+    var trimestre = $('#m_desempeno_academico #trimestre').parents('.form-group');
+
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+    } else {
+        grado.find('select').html(grados_inicial);
+    }
+
+    estudiante.hide();
+    $('#m_desempeno_academico select#filtro').change(function () {
+        let filtro = $(this).val();
+        switch (filtro) {
+            case 'todos':
+                estudiante.hide();
+                estudiante.find('input').removeAttr('required');
+                break;
+            case 'individual':
+                estudiante.show();
+                break;
+        }
+    });
+
+    $('#m_desempeno_academico select#grado').change(function () {
+        if ($('#m_desempeno_academico #grado').val() != "") {
+            $.ajax({
+                type: "GET",
+                url: $("#getMateriasFiltro").val(),
+                data: {
+                    grado: $('#m_desempeno_academico #grado').val(),
+                },
+                dataType: "json",
+                success: function (response) {
+                    $('#m_desempeno_academico select#materia').html(response)
+                }
+            });
+        }
+    });
+}
+function notificacions() {
+    var estudiante = $('#m_notificacions #estudiante').parents('.form-group');
+    var nivel = $('#m_notificacions #nivel').parents('.form-group');
+    var grado = $('#m_notificacions #grado').parents('.form-group');
+    var paralelo = $('#m_notificacions #paralelo').parents('.form-group');
+    var turno = $('#m_notificacions #turno').parents('.form-group');
+    var gestion = $('#m_notificacions #gestion').parents('.form-group');
+    var trimestre = $('#m_notificacions #trimestre').parents('.form-group');
+
+    let valor = nivel.find('select').val();
+    if (valor != 'NIVEL INICIAL') {
+        grado.find('select').html(grados);
+    } else {
+        grado.find('select').html(grados_inicial);
+    }
+
+    estudiante.hide();
+    $('#m_notificacions select#filtro').change(function () {
+        let filtro = $(this).val();
+        switch (filtro) {
+            case 'todos':
+                estudiante.hide();
+                estudiante.find('input').removeAttr('required');
+                break;
+            case 'individual':
+                estudiante.show();
+                break;
+        }
+    });
+
+    $('#m_notificacions select#grado').change(function () {
+        if ($('#m_notificacions #grado').val() != "") {
+            $.ajax({
+                type: "GET",
+                url: $("#getMateriasFiltro").val(),
+                data: {
+                    grado: $('#m_notificacions #grado').val(),
+                },
+                dataType: "json",
+                success: function (response) {
+                    $('#m_notificacions select#materia').html(response)
+                }
+            });
         }
     });
 }

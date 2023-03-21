@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ asset('jquery-steps/demo/css/jquery.steps.css') }}">
 
     {{-- Highcharts --}}
-    <link rel="stylesheet"src="{{asset('Highcharts/code/css/highcharts.css')}}">
+    <link rel="stylesheet"src="{{ asset('Highcharts/code/css/highcharts.css') }}">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template/AdminLTE-3.0.5/dist/css/adminlte.min.css') }}">
@@ -46,17 +46,17 @@
     <link href="{{ asset('google-fonts/sans_pro.css') }}" rel="stylesheet">
 </head>
 
-<body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed control-sidebar-slide-open text-sm @yield('sidebar-collapse')">
+<body
+    class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed control-sidebar-slide-open text-sm @yield('sidebar-collapse')">
     @php
-    $nombre_usuario = Auth::user()->name;
-    if(Auth::user()->administrativo)
-    {
-        $nombre_usuario = Auth::user()->administrativo->nombre.' '.Auth::user()->administrativo->paterno.' '.Auth::user()->administrativo->materno;
-    }else if(Auth::user()->profesor){
-        $nombre_usuario = Auth::user()->profesor->nombre.' '.Auth::user()->profesor->paterno.' '.Auth::user()->profesor->materno;
-    }else if(Auth::user()->estudiante){
-        $nombre_usuario = Auth::user()->estudiante->nombre.' '.Auth::user()->estudiante->paterno.' '.Auth::user()->estudiante->materno;
-    }
+        $nombre_usuario = Auth::user()->name;
+        if (Auth::user()->administrativo) {
+            $nombre_usuario = Auth::user()->administrativo->nombre . ' ' . Auth::user()->administrativo->paterno . ' ' . Auth::user()->administrativo->materno;
+        } elseif (Auth::user()->profesor) {
+            $nombre_usuario = Auth::user()->profesor->nombre . ' ' . Auth::user()->profesor->paterno . ' ' . Auth::user()->profesor->materno;
+        } elseif (Auth::user()->estudiante) {
+            $nombre_usuario = Auth::user()->estudiante->nombre . ' ' . Auth::user()->estudiante->paterno . ' ' . Auth::user()->estudiante->materno;
+        }
     @endphp
 
     <div class="wrapper">
@@ -65,7 +65,8 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
                 </li>
                 {{-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
@@ -138,15 +139,17 @@
                     </div>
                 </li> --}}
                 <!-- Notifications Dropdown Menu -->
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge" id="nroNotificaciones">0</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="contenedorNotificaciones">
+                @if (Auth::user()->tipo == 'TUTOR')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-danger navbar-badge" id="nroNotificaciones">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="contenedorNotificaciones">
 
-                    </div>
-                </li> --}}
+                        </div>
+                    </li>
+                @endif
                 <li class="nav-item dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('imgs/users/' . Auth::user()->foto) }}"
@@ -156,9 +159,10 @@
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-success">
-                            <img src="{{ asset('imgs/users/' . Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image">
-                            <p class="text-white">{{ $nombre_usuario }}{{-- <small>Member since Nov. 2012</small>--}}</p>
-                            <p class="text-white">{{Auth::user()->tipo}}</p>
+                            <img src="{{ asset('imgs/users/' . Auth::user()->foto) }}" class="img-circle elevation-2"
+                                alt="User Image">
+                            <p class="text-white">{{ $nombre_usuario }}{{-- <small>Member since Nov. 2012</small> --}}</p>
+                            <p class="text-white">{{ Auth::user()->tipo }}</p>
                         </li>
                         <!-- Menu Body -->
                         <li class="user-body">
@@ -170,11 +174,14 @@
                                 <div class="col-4 text-center">
                                 </div>
                                 <div class="col-4 text-center">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();" class="btn btn-default">Salir</a>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                                        class="btn btn-default">Salir</a>
                                 </div>
                             </div>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
                             <!-- /.row -->
@@ -217,25 +224,26 @@
                         <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
+                            <a href="{{ route('home') }}"
+                                class="nav-link {{ request()->is('home') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>Inicio</p>
                             </a>
                         </li>
-                        @if(Auth::user()->tipo == 'ADMINISTRADOR')
-                        @include('includes.menu.menu_admin')
+                        @if (Auth::user()->tipo == 'ADMINISTRADOR')
+                            @include('includes.menu.menu_admin')
                         @endif
-                        @if(Auth::user()->tipo == 'PROFESOR')
-                        @include('includes.menu.menu_profesor')
+                        @if (Auth::user()->tipo == 'PROFESOR')
+                            @include('includes.menu.menu_profesor')
                         @endif
-                        @if(Auth::user()->tipo == 'ESTUDIANTE')
-                        @include('includes.menu.menu_estudiante')
+                        @if (Auth::user()->tipo == 'ESTUDIANTE')
+                            @include('includes.menu.menu_estudiante')
                         @endif
-                        @if(Auth::user()->tipo == 'SECRETARIA ACADÉMICA')
-                        @include('includes.menu.menu_secretaria')
+                        @if (Auth::user()->tipo == 'SECRETARIA ACADÉMICA')
+                            @include('includes.menu.menu_secretaria')
                         @endif
-                        @if(Auth::user()->tipo == 'TUTOR')
-                        @include('includes.menu.menu_tutor')
+                        @if (Auth::user()->tipo == 'TUTOR')
+                            @include('includes.menu.menu_tutor')
                         @endif
                     </ul>
                 </nav>
@@ -275,13 +283,12 @@
 
     <!-- DataTables -->
     <script src="{{ asset('template/AdminLTE-3.0.5/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('template/AdminLTE-3.0.5/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}">
-    </script>
+    <script src="{{ asset('template/AdminLTE-3.0.5/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('template/AdminLTE-3.0.5/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}">
     </script>
     <script src="{{ asset('template/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}">
     </script>
-    
+
     <!-- SweetAlert2 -->
     <script src="{{ asset('template/AdminLTE-3.0.5/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- Toastr -->
@@ -303,10 +310,10 @@
     <script src="{{ asset('js/debounce.js') }}"></script>
 
     <!-- Highcharts -->
-    <script src="{{asset('Highcharts/code/highcharts.js')}}"></script>
-    <script src="{{asset('Highcharts/code/highcharts-3d.src.js')}}"></script>
-    <script src="{{asset('Highcharts/code/modules/exporting.js')}}"></script>
-    <script src="{{asset('Highcharts/code/modules/export-data.js')}}"></script>
+    <script src="{{ asset('Highcharts/code/highcharts.js') }}"></script>
+    <script src="{{ asset('Highcharts/code/highcharts-3d.src.js') }}"></script>
+    <script src="{{ asset('Highcharts/code/modules/exporting.js') }}"></script>
+    <script src="{{ asset('Highcharts/code/modules/export-data.js') }}"></script>
 
     {{-- STEPS --}}
     {{-- <script src="{{ asset('jquery-steps/src/defaults.js') }}"></script>
@@ -378,10 +385,45 @@
                 title: mensaje
             })
         }
-
     </script>
     @yield('scripts')
 
+    @if (Auth::user()->tipo == 'TUTOR')
+        <input type="hidden" value="{{ route('desempeno_estudiantes.getNotificaciones') }}"
+            id="urlGetNotificaciones">
+        <script>
+            let nroNotificaciones = $("#nroNotificaciones");
+            let contenedorNotificaciones = $("#contenedorNotificaciones");
+            $(document).ready(function() {
+                getNotificaciones();
+                setInterval(getNotificaciones, 2000);
+            });
+            let ultimo_id = 0;
+
+            function getNotificaciones() {
+                $.ajax({
+                    type: "GET",
+                    url: $("#urlGetNotificaciones").val(),
+                    data: {
+                        ultimo_id: ultimo_id,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.no_vistos == 0) {
+                            nroNotificaciones.addClass("oculto");
+                        } else {
+                            nroNotificaciones.removeClass("oculto");
+                            nroNotificaciones.text(response.no_vistos);
+                        }
+                        if (response.html != "") {
+                            contenedorNotificaciones.append(response.html);
+                            ultimo_id = response.ultimo_id;
+                        }
+                    }
+                });
+            }
+        </script>
+    @endif
 </body>
 
 </html>

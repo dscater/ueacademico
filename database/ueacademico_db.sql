@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 02-03-2023 a las 02:11:15
--- Versión del servidor: 8.0.23
--- Versión de PHP: 7.4.4
+-- Servidor: localhost:3306
+-- Tiempo de generación: 21-03-2023 a las 15:59:57
+-- Versión del servidor: 5.7.33
+-- Versión de PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `websaf_db`
+-- Base de datos: `ueacademico_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `actividad_profesors`
+--
+
+CREATE TABLE `actividad_profesors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observacion` text COLLATE utf8mb4_unicode_ci,
+  `fecha_registro` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `actividad_profesors`
+--
+
+INSERT INTO `actividad_profesors` (`id`, `user_id`, `fecha`, `descripcion`, `observacion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(8, 4, '2023-03-12', 'MODIFCADO 13', '', '2023-03-08', '2023-03-08 14:22:38', '2023-03-08 14:35:53'),
+(9, 11, '2023-03-10', 'PRUEBA ACTIVIDAD GRACIELA GOMEZ, MODIFICADO', '', '2023-03-08', '2023-03-08 14:29:43', '2023-03-08 14:36:14'),
+(10, 4, '2023-03-12', 'DESCRIPCION MODIFICADO', '', '2023-03-08', '2023-03-08 14:34:07', '2023-03-08 14:34:07'),
+(11, 11, '2023-03-08', 'DESC', '', '2023-03-08', '2023-03-08 14:37:06', '2023-03-08 14:37:06');
 
 -- --------------------------------------------------------
 
@@ -28,38 +55,38 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrativos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lugar_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lugar_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_nac` date NOT NULL,
-  `edad` int NOT NULL,
-  `sexo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado_civil` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zona` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avenida` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nro_rda` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `afp` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nua` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `item_fiscal` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_seguro_social` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `caja_seguro_social` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `titulado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gestiones_trabajo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mes` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `observaciones` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `edad` int(11) NOT NULL,
+  `sexo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_civil` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenida` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro_rda` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `afp` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nua` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_fiscal` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_seguro_social` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `caja_seguro_social` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titulado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gestiones_trabajo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mes` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observaciones` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `estado` int NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -82,11 +109,11 @@ INSERT INTO `administrativos` (`id`, `nombre`, `paterno`, `materno`, `ci`, `ci_e
 --
 
 CREATE TABLE `administrativo_cursos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `administrativo_id` bigint UNSIGNED NOT NULL,
-  `nominacion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `duracion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `administrativo_id` bigint(20) UNSIGNED NOT NULL,
+  `nominacion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duracion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -120,13 +147,13 @@ INSERT INTO `administrativo_cursos` (`id`, `administrativo_id`, `nominacion`, `i
 --
 
 CREATE TABLE `administrativo_estudios` (
-  `id` bigint UNSIGNED NOT NULL,
-  `administrativo_id` bigint UNSIGNED NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `anio_egreso` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `especialidad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nro_titulo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `administrativo_id` bigint(20) UNSIGNED NOT NULL,
+  `nivel` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anio_egreso` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `especialidad` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro_titulo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -169,13 +196,13 @@ INSERT INTO `administrativo_estudios` (`id`, `administrativo_id`, `nivel`, `inst
 --
 
 CREATE TABLE `administrativo_otros` (
-  `id` bigint UNSIGNED NOT NULL,
-  `administrativo_id` bigint UNSIGNED NOT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `turno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zona` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total_horas` int DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `administrativo_id` bigint(20) UNSIGNED NOT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `turno` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zona` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_horas` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -208,11 +235,11 @@ INSERT INTO `administrativo_otros` (`id`, `administrativo_id`, `institucion`, `t
 --
 
 CREATE TABLE `administrativo_trabajos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `administrativo_id` bigint UNSIGNED NOT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gestion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `administrativo_id` bigint(20) UNSIGNED NOT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gestion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -245,11 +272,11 @@ INSERT INTO `administrativo_trabajos` (`id`, `administrativo_id`, `institucion`,
 --
 
 CREATE TABLE `areas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `campo_id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `campo_id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -275,45 +302,15 @@ INSERT INTO `areas` (`id`, `campo_id`, `nombre`, `tipo`, `descripcion`, `created
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asistencias`
---
-
-CREATE TABLE `asistencias` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `hora_ingreso` time DEFAULT NULL,
-  `hora_salida` time DEFAULT NULL,
-  `fecha` date NOT NULL,
-  `observacion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `asistencias`
---
-
-INSERT INTO `asistencias` (`id`, `user_id`, `hora_ingreso`, `hora_salida`, `fecha`, `observacion`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 4, '09:49:12', NULL, '2021-05-19', '', 1, '2021-05-19 13:49:12', '2021-05-19 13:49:12'),
-(2, 7, '09:50:15', NULL, '2021-05-19', '', 1, '2021-05-19 13:50:16', '2021-05-19 13:50:16'),
-(3, 8, '09:50:19', NULL, '2021-05-19', '', 1, '2021-05-19 13:50:19', '2021-05-19 13:50:19'),
-(4, 11, '09:50:22', NULL, '2021-05-19', '', 1, '2021-05-19 13:50:22', '2021-05-19 13:50:22'),
-(7, 4, '16:44:26', '16:45:05', '2021-05-25', '', 1, '2021-05-25 20:44:26', '2021-05-25 20:45:32'),
-(9, 15, '20:16:25', '23:44:17', '2021-06-07', '', 1, '2021-06-08 00:16:26', '2021-06-08 03:44:18');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `calificacions`
 --
 
 CREATE TABLE `calificacions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `inscripcion_id` bigint UNSIGNED NOT NULL,
-  `materia_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `inscripcion_id` bigint(20) UNSIGNED NOT NULL,
+  `materia_id` bigint(20) UNSIGNED NOT NULL,
   `nota_final` double(8,2) NOT NULL,
-  `estado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -324,15 +321,18 @@ CREATE TABLE `calificacions` (
 --
 
 INSERT INTO `calificacions` (`id`, `inscripcion_id`, `materia_id`, `nota_final`, `estado`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 1, 8, 0.00, 'REPROBADO', '2021-05-17', '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
-(2, 2, 2, 0.00, 'REPROBADO', '2021-05-17', '2021-05-17 16:32:10', '2021-05-17 16:32:10'),
-(3, 2, 6, 8.00, 'REPROBADO', '2021-05-17', '2021-05-17 16:32:11', '2021-05-18 16:22:58'),
-(4, 3, 2, 0.00, 'REPROBADO', '2021-05-17', '2021-05-17 16:32:19', '2021-05-17 16:32:19'),
-(5, 3, 6, 0.00, 'REPROBADO', '2021-05-17', '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
-(6, 4, 3, 0.00, 'REPROBADO', '2021-06-07', '2021-06-08 00:18:06', '2021-06-08 00:18:06'),
-(7, 4, 5, 0.00, 'REPROBADO', '2021-06-07', '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
-(8, 4, 7, 0.00, 'REPROBADO', '2021-06-07', '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
-(9, 4, 9, 0.00, 'REPROBADO', '2021-06-07', '2021-06-08 00:18:07', '2021-06-08 00:18:07');
+(1, 1, 3, 6.00, 'REPROBADO', '2023-03-17', '2023-03-17 15:44:37', '2023-03-20 14:52:32'),
+(2, 1, 5, 0.00, 'REPROBADO', '2023-03-17', '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(3, 1, 7, 0.00, 'REPROBADO', '2023-03-17', '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(4, 1, 9, 0.00, 'REPROBADO', '2023-03-17', '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(5, 2, 3, 5.00, 'REPROBADO', '2023-03-20', '2023-03-20 14:51:18', '2023-03-20 14:52:33'),
+(6, 2, 5, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(7, 2, 7, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(8, 2, 9, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(9, 3, 3, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(10, 3, 5, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(11, 3, 7, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(12, 3, 9, 0.00, 'REPROBADO', '2023-03-20', '2023-03-20 17:25:39', '2023-03-20 17:25:39');
 
 -- --------------------------------------------------------
 
@@ -341,9 +341,9 @@ INSERT INTO `calificacions` (`id`, `inscripcion_id`, `materia_id`, `nota_final`,
 --
 
 CREATE TABLE `calificacion_trimestres` (
-  `id` bigint UNSIGNED NOT NULL,
-  `calificacion_id` bigint UNSIGNED NOT NULL,
-  `trimestre` int NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `calificacion_id` bigint(20) UNSIGNED NOT NULL,
+  `trimestre` int(11) NOT NULL,
   `promedio_final` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -354,7 +354,7 @@ CREATE TABLE `calificacion_trimestres` (
 --
 
 INSERT INTO `calificacion_trimestres` (`id`, `calificacion_id`, `trimestre`, `promedio_final`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0.00, '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
+(1, 1, 1, 18.00, '2021-05-17 16:31:21', '2023-03-20 14:52:31'),
 (2, 1, 2, 0.00, '2021-05-17 16:31:22', '2021-05-17 16:31:22'),
 (3, 1, 3, 0.00, '2021-05-17 16:31:22', '2021-05-17 16:31:22'),
 (4, 2, 1, 0.00, '2021-05-17 16:32:10', '2021-05-17 16:32:10'),
@@ -366,7 +366,7 @@ INSERT INTO `calificacion_trimestres` (`id`, `calificacion_id`, `trimestre`, `pr
 (10, 4, 1, 0.00, '2021-05-17 16:32:19', '2021-05-17 16:32:19'),
 (11, 4, 2, 0.00, '2021-05-17 16:32:19', '2021-05-17 16:32:19'),
 (12, 4, 3, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
-(13, 5, 1, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
+(13, 5, 1, 15.00, '2021-05-17 16:32:20', '2023-03-20 14:52:33'),
 (14, 5, 2, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (15, 5, 3, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (16, 6, 1, 0.00, '2021-06-08 00:18:06', '2021-06-08 00:18:06'),
@@ -380,7 +380,43 @@ INSERT INTO `calificacion_trimestres` (`id`, `calificacion_id`, `trimestre`, `pr
 (24, 8, 3, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
 (25, 9, 1, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
 (26, 9, 2, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
-(27, 9, 3, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07');
+(27, 9, 3, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
+(28, 1, 1, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(29, 1, 2, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(30, 1, 3, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(31, 2, 1, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(32, 2, 2, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(33, 2, 3, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(34, 3, 1, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(35, 3, 2, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(36, 3, 3, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(37, 4, 1, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(38, 4, 2, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(39, 4, 3, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(40, 5, 1, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(41, 5, 2, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(42, 5, 3, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(43, 6, 1, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(44, 6, 2, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(45, 6, 3, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(46, 7, 1, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(47, 7, 2, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(48, 7, 3, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(49, 8, 1, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(50, 8, 2, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(51, 8, 3, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(52, 9, 1, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(53, 9, 2, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(54, 9, 3, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(55, 10, 1, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(56, 10, 2, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(57, 10, 3, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(58, 11, 1, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(59, 11, 2, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(60, 11, 3, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(61, 12, 1, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(62, 12, 2, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(63, 12, 3, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39');
 
 -- --------------------------------------------------------
 
@@ -389,9 +425,9 @@ INSERT INTO `calificacion_trimestres` (`id`, `calificacion_id`, `trimestre`, `pr
 --
 
 CREATE TABLE `campos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -409,74 +445,174 @@ INSERT INTO `campos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `chat_desempenos`
+--
+
+CREATE TABLE `chat_desempenos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `desempeno_id` bigint(20) UNSIGNED NOT NULL,
+  `emisor_id` bigint(20) UNSIGNED NOT NULL,
+  `receptor_id` bigint(20) UNSIGNED NOT NULL,
+  `mensaje` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visto` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `chat_desempenos`
+--
+
+INSERT INTO `chat_desempenos` (`id`, `desempeno_id`, `emisor_id`, `receptor_id`, `mensaje`, `visto`, `created_at`, `updated_at`) VALUES
+(31, 6, 37, 7, 'Mensaje desde tutor', 1, '2023-03-21 15:32:20', '2023-03-21 15:53:56'),
+(32, 6, 7, 37, 'Mensaje desde profesor', 1, '2023-03-21 15:32:26', '2023-03-21 15:54:58'),
+(33, 7, 37, 7, 'Mensaje de prueba', 1, '2023-03-21 15:38:55', '2023-03-21 15:53:56'),
+(34, 6, 7, 37, 'mensaje de prueba', 1, '2023-03-21 15:44:01', '2023-03-21 15:54:58'),
+(35, 7, 37, 7, 'prueba mensje', 1, '2023-03-21 15:45:25', '2023-03-21 15:53:56'),
+(36, 7, 37, 7, 'otro mensaje', 1, '2023-03-21 15:46:09', '2023-03-21 15:53:56'),
+(37, 7, 37, 7, 'mas mensajes', 1, '2023-03-21 15:47:04', '2023-03-21 15:53:56'),
+(38, 7, 37, 7, 'otro mensaje', 1, '2023-03-21 15:47:48', '2023-03-21 15:53:56'),
+(39, 6, 7, 37, 'prueba mensaje', 1, '2023-03-21 15:48:36', '2023-03-21 15:54:58'),
+(40, 7, 37, 7, 'mas pruebas', 1, '2023-03-21 15:51:58', '2023-03-21 15:53:56');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `desempeno_estudiantes`
+--
+
+CREATE TABLE `desempeno_estudiantes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `inscripcion_id` bigint(20) UNSIGNED NOT NULL,
+  `materia_id` bigint(20) UNSIGNED NOT NULL,
+  `estudiante_id` bigint(20) UNSIGNED NOT NULL,
+  `desempeno` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valoracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `observacion` text COLLATE utf8mb4_unicode_ci,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `materia_profesor` bigint(20) UNSIGNED NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `desempeno_estudiantes`
+--
+
+INSERT INTO `desempeno_estudiantes` (`id`, `inscripcion_id`, `materia_id`, `estudiante_id`, `desempeno`, `valoracion`, `fecha`, `observacion`, `user_id`, `materia_profesor`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(5, 1, 3, 1, 'PRUEBA DESEMPENO', 'BUENA', '2023-03-17', '', 4, 17, '2023-03-17', '2023-03-17 16:16:38', '2023-03-17 16:17:29'),
+(6, 3, 7, 3, 'PRUEBA DESEMPEÑO CON NOTIFICACION', 'EXCELENTE', '2023-03-21', '', 7, 21, '2023-03-21', '2023-03-21 14:55:42', '2023-03-21 14:55:42'),
+(7, 3, 9, 3, 'OTRA PRUEBA', 'BUENA', '2023-03-21', '', 7, 22, '2023-03-21', '2023-03-21 15:02:27', '2023-03-21 15:02:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `desempeno_notificacions`
+--
+
+CREATE TABLE `desempeno_notificacions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `desempeno_id` bigint(20) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `desempeno` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valoracion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `visto` int(11) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `desempeno_notificacions`
+--
+
+INSERT INTO `desempeno_notificacions` (`id`, `desempeno_id`, `fecha`, `hora`, `desempeno`, `valoracion`, `user_id`, `visto`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(9, 5, '2023-03-17', '12:16:00', 'PRUEBA DESEMPENO', 'BUENA', 30, 0, '2023-03-17', '2023-03-17 16:16:38', '2023-03-17 16:17:29'),
+(10, 5, '2023-03-17', '12:16:00', 'PRUEBA DESEMPENO', 'BUENA', 31, 0, '2023-03-17', '2023-03-17 16:16:38', '2023-03-17 16:17:29'),
+(11, 6, '2023-03-21', '10:55:00', 'PRUEBA DESEMPEÑO CON NOTIFICACION', 'EXCELENTE', 26, 1, '2023-03-21', '2023-03-21 14:55:42', '2023-03-21 15:28:45'),
+(12, 6, '2023-03-21', '10:55:00', 'PRUEBA DESEMPEÑO CON NOTIFICACION', 'EXCELENTE', 28, 0, '2023-03-21', '2023-03-21 14:55:42', '2023-03-21 14:55:42'),
+(13, 7, '2023-03-21', '11:02:00', 'OTRA PRUEBA', 'BUENA', 26, 1, '2023-03-21', '2023-03-21 15:02:27', '2023-03-21 15:28:45'),
+(14, 7, '2023-03-21', '11:02:00', 'OTRA PRUEBA', 'BUENA', 28, 0, '2023-03-21', '2023-03-21 15:02:27', '2023-03-21 15:02:27');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estudiantes`
 --
 
 CREATE TABLE `estudiantes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_doc` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_doc` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pais_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dpto_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provincia_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `localidad_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_doc` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_doc` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pais_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dpto_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provincia_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `localidad_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_nac` date NOT NULL,
-  `sexo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `oficialia` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `libro` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `partida` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `folio` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ue_procedencia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo_sie_ue` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provincia_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zona_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `municipio_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avenida_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `localidad_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idioma_niniez` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idiomas_estudiante` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pueblo_nacion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pueblo_nacion_otro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `centro_salud` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `veces_centro_salud` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discapacidad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discapacidad_otro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc_discapacidad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `agua` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `energia_electrica` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banio` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `actividad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dias_trabajo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `recibio_pago` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `internet` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `frecuencia_internet` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `llega` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `llega_otro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc_llega` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ap_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nom_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idioma_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ocupacion_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grado_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parentezco_padre_tutor` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ci_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ap_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nom_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idioma_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ocupacion_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `grado_madre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lugar` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sexo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `oficialia` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `libro` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `partida` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `folio` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ue_procedencia` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_sie_ue` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provincia_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `municipio_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenida_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `localidad_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idioma_niniez` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idiomas_estudiante` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pueblo_nacion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pueblo_nacion_otro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `centro_salud` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `veces_centro_salud` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `discapacidad` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `discapacidad_otro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc_discapacidad` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `agua` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `energia_electrica` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banio` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `actividad` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dias_trabajo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `recibio_pago` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `internet` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `frecuencia_internet` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `llega` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `llega_otro` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc_llega` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `app_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apm_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nom_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_tutor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `idioma_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ocupacion_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `grado_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parentezco_padre_tutor` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ci_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `app_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apm_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nom_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_madre_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `idioma_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ocupacion_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grado_madre` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lugar` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `estado` int NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -485,12 +621,12 @@ CREATE TABLE `estudiantes` (
 -- Volcado de datos para la tabla `estudiantes`
 --
 
-INSERT INTO `estudiantes` (`id`, `nombre`, `paterno`, `materno`, `tipo_doc`, `nro_doc`, `ci_exp`, `pais_nac`, `dpto_nac`, `provincia_nac`, `localidad_nac`, `fecha_nac`, `sexo`, `oficialia`, `libro`, `partida`, `folio`, `ue_procedencia`, `codigo_sie_ue`, `provincia_dir`, `zona_dir`, `municipio_dir`, `avenida_dir`, `localidad_dir`, `fono_dir`, `nro_dir`, `idioma_niniez`, `idiomas_estudiante`, `pueblo_nacion`, `pueblo_nacion_otro`, `centro_salud`, `veces_centro_salud`, `discapacidad`, `discapacidad_otro`, `desc_discapacidad`, `agua`, `energia_electrica`, `banio`, `actividad`, `dias_trabajo`, `recibio_pago`, `internet`, `frecuencia_internet`, `llega`, `llega_otro`, `desc_llega`, `ci_padre_tutor`, `ap_padre_tutor`, `nom_padre_tutor`, `idioma_padre_tutor`, `ocupacion_padre_tutor`, `grado_padre_tutor`, `parentezco_padre_tutor`, `ci_madre`, `ap_madre`, `nom_madre`, `idioma_madre`, `ocupacion_madre`, `grado_madre`, `lugar`, `foto`, `fecha_registro`, `user_id`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'FELIPE', 'VALLEJOS', 'MARTINEZ', 'CI', '741258', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2000-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', 'NINGUNA', 'OTRO', 'SDFSD', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'EN VEHÍCULO DE TRANSPORTE TERRESTRE', '', 'MENOS DE MEDIA HORA', '78946512', 'VALLEJOS', 'JORGE', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', 'PADRE', '78945612', 'MARTINEZ', 'MARIA', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', 'FELIPE1659976549.png', '2021-05-11', 5, 1, '2021-05-11 16:44:14', '2022-08-08 16:35:49'),
-(2, 'MARTHA', 'SUAREZ', 'MAMANI', 'CI', '963258', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2000-01-01', 'F', '1234', '1234', '1234', '44123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '1 A 2 VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'EN VEHÍCULO DE TRANSPORTE TERRESTRE', '', 'ENTRE MEDIA HORA Y UNA HORA', '78946512', 'SUAREZ', 'MARCOS', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', 'PADRE', '', '', '', '', '', '', '', 'MARTHA1659976537.png', '2021-05-11', 6, 1, '2021-05-11 19:46:12', '2022-08-08 16:35:37'),
-(3, 'ELVIS', 'HUANCA', '', 'CI', '753214', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2001-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '6 O MÁS VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'TRABAJÓ EN AGRICULTURA O AGROINDUSTRIA', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', '', 'MENOS DE MEDIA HORA', '88888', 'HUANCA', 'JORGE', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', '', '', '', '', '', '', '', 'ELVIS1659976493.png', '2021-05-17', 9, 1, '2021-05-17 15:24:47', '2022-08-08 16:34:53'),
-(4, 'CHOQUE', 'MARTIN', 'CHOQUE', 'CI', '3333', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2002-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '1 A 2 VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', '', 'ENTRE MEDIA HORA Y UNA HORA', '78946512', 'VALLEJOS', 'CHOQUE', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', '78945612', 'CHOQUE', 'MARIA', 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', 'CHOQUE1659976507.png', '2021-05-18', 12, 1, '2021-05-18 16:06:04', '2022-08-08 16:35:07'),
-(5, 'FLORES', 'MARYSOL', 'CALLE', 'CI', '405060', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2009-06-10', 'F', '2121', '22121', '2121', '5454', 'SAN AGUSTÍN', '45154', 'MURILLO', 'ZONA CENTRAL', 'LA PAZ', 'CALLE 2', 'LA PAZ', '2885585', '6526', 'X', 'X', 'GUARANÍ', 'X', 'SI', '1 A 2 VECES', '', 'X', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'AYUDÓ EN EL HOGAR EN LABORES DOMÉSTICAS, COMERCIO O VENTAS', '3', 'SI', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', 'X', 'ENTRE MEDIA HORA Y UNA HORA', 'CARLOS', 'CALLE', 'VARGAS', 'X', 'X', 'X', 'X', 'NELLY', 'FLORES', 'TAPIA', 'X', 'X', 'X', '', 'FLORES1659976522.png', '2021-06-07', 14, 1, '2021-06-07 23:58:10', '2022-08-08 16:35:22');
+INSERT INTO `estudiantes` (`id`, `nombre`, `paterno`, `materno`, `tipo_doc`, `nro_doc`, `ci_exp`, `pais_nac`, `dpto_nac`, `provincia_nac`, `localidad_nac`, `fecha_nac`, `sexo`, `oficialia`, `libro`, `partida`, `folio`, `ue_procedencia`, `codigo_sie_ue`, `provincia_dir`, `zona_dir`, `municipio_dir`, `avenida_dir`, `localidad_dir`, `fono_dir`, `nro_dir`, `idioma_niniez`, `idiomas_estudiante`, `pueblo_nacion`, `pueblo_nacion_otro`, `centro_salud`, `veces_centro_salud`, `discapacidad`, `discapacidad_otro`, `desc_discapacidad`, `agua`, `energia_electrica`, `banio`, `actividad`, `dias_trabajo`, `recibio_pago`, `internet`, `frecuencia_internet`, `llega`, `llega_otro`, `desc_llega`, `ci_padre_tutor`, `app_padre_tutor`, `apm_padre_tutor`, `nom_padre_tutor`, `user_tutor_id`, `idioma_padre_tutor`, `ocupacion_padre_tutor`, `grado_padre_tutor`, `parentezco_padre_tutor`, `ci_madre`, `app_madre`, `apm_madre`, `nom_madre`, `user_madre_id`, `idioma_madre`, `ocupacion_madre`, `grado_madre`, `lugar`, `foto`, `fecha_registro`, `user_id`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'FELIPE', 'VALLEJOS', 'MARTINEZ', 'CI', '741258', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2000-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', 'NINGUNA', 'OTRO', 'SDFSD', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'EN VEHÍCULO DE TRANSPORTE TERRESTRE', '', 'MENOS DE MEDIA HORA', '78946512', 'VALLEJOS', '', 'JORGE', 43, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', 'PADRE', '78945612', 'MARTINEZ', '', 'MARIA', 44, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', 'FELIPE1659976549.png', '2021-05-11', 5, 1, '2021-05-11 16:44:14', '2023-03-21 15:31:11'),
+(2, 'MARTHA', 'SUAREZ', 'MAMANI', 'CI', '963258', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2000-01-01', 'F', '1234', '1234', '1234', '44123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '1 A 2 VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'EN VEHÍCULO DE TRANSPORTE TERRESTRE', '', 'ENTRE MEDIA HORA Y UNA HORA', '78946512', 'SUAREZ', '', 'MARCOS', 42, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', 'PADRE', '', '', '', '', NULL, '', '', '', '', 'MARTHA1659976537.png', '2021-05-11', 6, 1, '2021-05-11 19:46:12', '2023-03-21 15:31:07'),
+(3, 'ELVIS', 'HUANCA', '', 'CI', '753214', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2001-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '6 O MÁS VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'TRABAJÓ EN AGRICULTURA O AGROINDUSTRIA', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', '', 'MENOS DE MEDIA HORA', '88888', 'HUANCA', '', 'JORGE', 36, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', '77777', 'SALAS', '', 'MARIA', 37, '', '', '', '', 'EH5000031678208110.png', '2021-05-17', 9, 1, '2021-05-17 15:24:47', '2023-03-21 15:30:57'),
+(4, 'CHOQUE', 'MARTIN', 'CHOQUE', 'CI', '3333', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2002-01-01', 'M', '123', '123', '123', '123', '', '', 'MURILLO', 'ZONA LOS OLIVOS', 'LA PAZ', 'CALLE 3', 'LA PAZ', '78945612', '12', 'ESPAÑOL', 'ESPAÑOL', 'NO PERTENECE', '', 'SI', '1 A 2 VECES', '', '', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'NO TRABAJÓ', '', '', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', '', 'ENTRE MEDIA HORA Y UNA HORA', '78946512', 'VALLEJOS', '', 'CHOQUE', 38, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', '78945612', 'CHOQUE', '', 'MARIA', 39, 'ESPAÑOL', 'OCUPACION LABORAL', 'GRADO ALCANZADO', '', 'CHOQUE1659976507.png', '2021-05-18', 12, 1, '2021-05-18 16:06:04', '2023-03-21 15:31:01'),
+(5, 'FLORES', 'MARYSOL', 'CALLE', 'CI', '405060', 'LP', 'BOLIVIA', 'LA PAZ', 'MURILLO', 'LA PAZ', '2009-06-10', 'F', '2121', '22121', '2121', '5454', 'SAN AGUSTÍN', '45154', 'MURILLO', 'ZONA CENTRAL', 'LA PAZ', 'CALLE 2', 'LA PAZ', '2885585', '6526', 'X', 'X', 'GUARANÍ', 'X', 'SI', '1 A 2 VECES', '', 'X', '', 'CAÑERÍA DE RED', 'SI', 'ALCANTARILLADO', 'AYUDÓ EN EL HOGAR EN LABORES DOMÉSTICAS, COMERCIO O VENTAS', '3', 'SI', 'SU DOMICILIO', 'DIARIAMENTE', 'A PIE', 'X', 'ENTRE MEDIA HORA Y UNA HORA', 'CARLOS', 'CALLE', '', 'VARGAS', 40, 'X', 'X', 'X', 'X', 'NELLY', 'FLORES', '', 'TAPIA', 41, 'X', 'X', 'X', '', 'FLORES1659976522.png', '2021-06-07', 14, 1, '2021-06-07 23:58:10', '2023-03-21 15:31:04');
 
 -- --------------------------------------------------------
 
@@ -499,15 +635,15 @@ INSERT INTO `estudiantes` (`id`, `nombre`, `paterno`, `materno`, `tipo_doc`, `nr
 --
 
 CREATE TABLE `inscripcions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `estudiante_id` bigint UNSIGNED NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paralelo_id` bigint UNSIGNED NOT NULL,
-  `turno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gestion` int NOT NULL,
-  `estado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` int NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `estudiante_id` bigint(20) UNSIGNED NOT NULL,
+  `nivel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `grado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paralelo_id` bigint(20) UNSIGNED NOT NULL,
+  `turno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gestion` int(11) NOT NULL,
+  `estado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -518,10 +654,9 @@ CREATE TABLE `inscripcions` (
 --
 
 INSERT INTO `inscripcions` (`id`, `estudiante_id`, `nivel`, `grado`, `paralelo_id`, `turno`, `gestion`, `estado`, `status`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 1, 'NIVEL INICIAL', '1', 3, 'MAÑANA', 2021, 'REPROBADO', 1, '2021-05-17', '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
-(2, 2, 'PRIMARIA', '1', 3, 'MAÑANA', 2021, 'REPROBADO', 1, '2021-05-17', '2021-05-17 16:32:10', '2021-05-17 16:32:10'),
-(3, 3, 'PRIMARIA', '1', 3, 'MAÑANA', 2021, 'REPROBADO', 1, '2021-05-17', '2021-05-17 16:32:19', '2021-05-17 16:32:19'),
-(4, 5, 'SECUNDARIA', '1', 3, 'MAÑANA', 2021, 'REPROBADO', 1, '2021-06-07', '2021-06-08 00:18:06', '2021-06-08 00:18:06');
+(1, 1, 'SECUNDARIA', '1', 3, 'MAÑANA', 2023, 'REPROBADO', 1, '2023-03-17', '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(2, 2, 'SECUNDARIA', '1', 3, 'MAÑANA', 2023, 'REPROBADO', 1, '2023-03-20', '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(3, 3, 'SECUNDARIA', '2', 3, 'MAÑANA', 2023, 'REPROBADO', 1, '2023-03-20', '2023-03-20 17:25:37', '2023-03-20 17:25:37');
 
 -- --------------------------------------------------------
 
@@ -530,12 +665,12 @@ INSERT INTO `inscripcions` (`id`, `estudiante_id`, `nivel`, `grado`, `paralelo_i
 --
 
 CREATE TABLE `materias` (
-  `id` bigint UNSIGNED NOT NULL,
-  `area_id` bigint UNSIGNED NOT NULL,
-  `codigo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_registro` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `area_id` bigint(20) UNSIGNED NOT NULL,
+  `codigo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_registro` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -560,10 +695,10 @@ INSERT INTO `materias` (`id`, `area_id`, `codigo`, `nivel`, `nombre`, `fecha_reg
 --
 
 CREATE TABLE `materia_grados` (
-  `id` bigint UNSIGNED NOT NULL,
-  `materia_id` bigint UNSIGNED NOT NULL,
-  `grado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `horas` int DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `materia_id` bigint(20) UNSIGNED NOT NULL,
+  `grado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `horas` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -619,9 +754,9 @@ INSERT INTO `materia_grados` (`id`, `materia_id`, `grado`, `horas`, `created_at`
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -658,43 +793,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2021_05_13_200001_create_inscripcion_materias_table', 3),
 (28, '2021_05_13_200839_create_inscripcion_materia_trimestres_table', 4),
 (29, '2021_05_13_201057_create_trimestre_actividads_table', 5),
-(30, '2021_05_13_200838_create_calificacion_trimestres_table', 6);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pago_estudiantes`
---
-
-CREATE TABLE `pago_estudiantes` (
-  `id` bigint UNSIGNED NOT NULL,
-  `estudiante_id` bigint UNSIGNED NOT NULL,
-  `inscripcion_id` bigint UNSIGNED NOT NULL,
-  `concepto` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `monto` decimal(24,2) NOT NULL,
-  `fecha_pago` date NOT NULL,
-  `tipo_factura` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `factura_nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `factura_nit` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `gestion` int NOT NULL,
-  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cod_control` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_limite` date DEFAULT NULL,
-  `estado` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `pago_estudiantes`
---
-
-INSERT INTO `pago_estudiantes` (`id`, `estudiante_id`, `inscripcion_id`, `concepto`, `monto`, `fecha_pago`, `tipo_factura`, `factura_nombre`, `factura_nit`, `fecha_registro`, `gestion`, `descripcion`, `qr`, `cod_control`, `fecha_limite`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'INSCRIPCIÓN', '150.00', '2021-05-25', 'PADRE/TUTOR', 'VALLEJOS JORGE', '78946512', '2021-05-25', 2021, '', '1621966442_1.png', '9F-18-53-91-2F-', '2021-11-25', 1, '2021-05-25 18:14:02', '2021-05-25 18:14:02'),
-(2, 1, 1, 'OTRO PAGO', '300.00', '2021-05-25', 'OTRO', 'NOMBRE PRUEBA', '456', '2021-05-25', 2021, 'CONCEPTO PRUEBA', '1621967141_2.png', '2D-BB-A7-E4-F5-', '2021-11-25', 1, '2021-05-25 18:25:41', '2021-05-25 18:25:41'),
-(3, 2, 2, 'INSCRIPCIÓN', '250.00', '2021-05-25', 'PADRE/TUTOR', 'SUAREZ MARCOS', '78946512', '2021-05-25', 2021, '', '1621967835_3.png', 'EE-32-1C-86-15-', '2021-11-25', 1, '2021-05-25 18:37:15', '2021-05-25 18:37:15');
+(30, '2021_05_13_200838_create_calificacion_trimestres_table', 6),
+(31, '2023_03_06_114351_create_actividad_profesors_table', 7),
+(32, '2023_03_06_114515_create_desempeno_estudiantes_table', 8),
+(33, '2023_03_06_114554_create_desempeno_notificacions_table', 9),
+(34, '2023_03_17_150019_create_chat_desempenos_table', 10);
 
 -- --------------------------------------------------------
 
@@ -703,9 +806,9 @@ INSERT INTO `pago_estudiantes` (`id`, `estudiante_id`, `inscripcion_id`, `concep
 --
 
 CREATE TABLE `paralelos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `paralelo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `paralelo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -723,77 +826,42 @@ INSERT INTO `paralelos` (`id`, `paralelo`, `descripcion`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `plan_pagos`
---
-
-CREATE TABLE `plan_pagos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `concepto` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `monto` decimal(24,2) NOT NULL,
-  `gestion` int NOT NULL,
-  `meses` int NOT NULL,
-  `descripcion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_registro` date NOT NULL,
-  `estado` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `plan_pagos`
---
-
-INSERT INTO `plan_pagos` (`id`, `nivel`, `concepto`, `monto`, `gestion`, `meses`, `descripcion`, `fecha_registro`, `estado`, `created_at`, `updated_at`) VALUES
-(3, 'NIVEL INICIAL', 'INSCRIPCIÓN', '150.00', 2021, 10, 'DESCRIPCION PAGO INSCRIPCION NIVEL INICIAL', '2021-05-14', 1, '2021-05-14 16:26:50', '2021-05-14 21:58:34'),
-(4, 'PRIMARIA', 'INSCRIPCIÓN', '250.00', 2021, 10, 'DESCRIPCION  PAGO INSCRIPCION NIVEL PRIMARIA', '2021-05-14', 1, '2021-05-14 16:27:19', '2021-05-14 16:27:19'),
-(5, 'SECUNDARIA', 'INSCRIPCIÓN', '350.00', 2021, 10, 'DESCRIPCION INSCRIPCION PAGO NIVEL SECUNDARIA', '2021-05-14', 1, '2021-05-14 16:28:01', '2021-05-14 16:28:01'),
-(6, 'NIVEL INICIAL', 'MENSUALIDAD', '170.00', 2021, 10, 'MENSUALIDAD NIVEL INICIAL', '2021-05-14', 1, '2021-05-14 16:29:42', '2021-05-14 16:29:42'),
-(7, 'PRIMARIA', 'MENSUALIDAD', '270.00', 2021, 10, 'MENSUALIDAD PRIMARIA', '2021-05-14', 1, '2021-05-14 16:29:53', '2021-05-14 16:29:53'),
-(8, 'SECUNDARIA', 'MENSUALIDAD', '370.00', 2021, 10, 'MENSUALIDAD SECUNDARIA', '2021-05-14', 1, '2021-05-14 16:30:03', '2021-05-14 16:30:03'),
-(9, 'NIVEL INICIAL', 'PAGO GLOBAL AL CONTADO', '1500.00', 2021, 10, 'PAGO GLOBAL NIVEL INICIAL', '2021-05-14', 1, '2021-05-14 16:30:42', '2021-05-14 16:30:42'),
-(10, 'PRIMARIA', 'PAGO GLOBAL AL CONTADO', '2500.00', 2021, 10, 'PAGO GLOBAL PRIMARIA', '2021-05-14', 1, '2021-05-14 16:31:00', '2021-05-14 16:31:00'),
-(11, 'SECUNDARIA', 'PAGO GLOBAL AL CONTADO', '3500.00', 2021, 10, 'PAGO GLOBAL SECUNDARIA', '2021-05-14', 1, '2021-05-14 16:31:09', '2021-05-14 16:31:09');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `profesors`
 --
 
 CREATE TABLE `profesors` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lugar_nac` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lugar_nac` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_nac` date NOT NULL,
-  `edad` int NOT NULL,
-  `sexo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado_civil` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zona` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avenida` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nro_rda` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `afp` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nua` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `item_fiscal` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_seguro_social` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `caja_seguro_social` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `titulado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gestiones_trabajo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mes` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `observaciones` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `edad` int(11) NOT NULL,
+  `sexo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_civil` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenida` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro_rda` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `afp` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nua` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_fiscal` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_seguro_social` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `caja_seguro_social` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titulado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gestiones_trabajo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mes` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observaciones` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `estado` int NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -816,11 +884,11 @@ INSERT INTO `profesors` (`id`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `
 --
 
 CREATE TABLE `profesor_cursos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `nominacion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `duracion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `profesor_id` bigint(20) UNSIGNED NOT NULL,
+  `nominacion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `duracion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -854,13 +922,13 @@ INSERT INTO `profesor_cursos` (`id`, `profesor_id`, `nominacion`, `institucion`,
 --
 
 CREATE TABLE `profesor_estudios` (
-  `id` bigint UNSIGNED NOT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `anio_egreso` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `especialidad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nro_titulo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `profesor_id` bigint(20) UNSIGNED NOT NULL,
+  `nivel` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anio_egreso` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `especialidad` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro_titulo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -903,14 +971,14 @@ INSERT INTO `profesor_estudios` (`id`, `profesor_id`, `nivel`, `institucion`, `a
 --
 
 CREATE TABLE `profesor_materias` (
-  `id` bigint UNSIGNED NOT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `nivel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paralelo_id` bigint UNSIGNED NOT NULL,
-  `turno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gestion` int NOT NULL,
-  `materia_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `profesor_id` bigint(20) UNSIGNED NOT NULL,
+  `nivel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `grado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paralelo_id` bigint(20) UNSIGNED NOT NULL,
+  `turno` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gestion` int(11) NOT NULL,
+  `materia_id` bigint(20) UNSIGNED NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -921,13 +989,10 @@ CREATE TABLE `profesor_materias` (
 --
 
 INSERT INTO `profesor_materias` (`id`, `profesor_id`, `nivel`, `grado`, `paralelo_id`, `turno`, `gestion`, `materia_id`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(6, 1, 'PRIMARIA', '1', 3, 'MAÑANA', 2021, 2, '2021-05-14', '2021-05-14 16:01:33', '2021-05-14 16:01:33'),
-(9, 2, 'NIVEL INICIAL', '1', 3, 'MAÑANA', 2021, 8, '2021-05-14', '2021-05-14 16:04:31', '2021-05-14 16:04:31'),
-(11, 2, 'SECUNDARIA', '1', 3, 'MAÑANA', 2021, 3, '2021-05-17', '2021-05-17 15:22:19', '2021-05-17 15:22:19'),
-(12, 3, 'SECUNDARIA', '1', 3, 'MAÑANA', 2021, 7, '2021-05-17', '2021-05-17 15:22:27', '2021-05-17 15:22:27'),
-(13, 1, 'PRIMARIA', '1', 3, 'MAÑANA', 2021, 6, '2021-05-18', '2021-05-18 15:43:05', '2021-05-18 15:43:05'),
-(15, 5, 'SECUNDARIA', '2', 3, 'MAÑANA', 2021, 3, '2021-06-07', '2021-06-08 00:31:57', '2021-06-08 00:31:57'),
-(16, 5, 'SECUNDARIA', '2', 3, 'MAÑANA', 2021, 7, '2021-06-07', '2021-06-08 00:32:00', '2021-06-08 00:32:00');
+(17, 1, 'SECUNDARIA', '1', 3, 'MAÑANA', 2023, 3, '2023-03-09', '2023-03-09 20:36:18', '2023-03-09 20:36:18'),
+(19, 1, 'SECUNDARIA', '1', 3, 'MAÑANA', 2023, 7, '2023-03-17', '2023-03-17 15:44:21', '2023-03-17 15:44:21'),
+(21, 2, 'SECUNDARIA', '2', 3, 'MAÑANA', 2023, 7, '2023-03-21', '2023-03-21 14:46:28', '2023-03-21 14:46:28'),
+(22, 2, 'SECUNDARIA', '2', 3, 'MAÑANA', 2023, 9, '2023-03-21', '2023-03-21 14:46:31', '2023-03-21 14:46:31');
 
 -- --------------------------------------------------------
 
@@ -936,13 +1001,13 @@ INSERT INTO `profesor_materias` (`id`, `profesor_id`, `nivel`, `grado`, `paralel
 --
 
 CREATE TABLE `profesor_otros` (
-  `id` bigint UNSIGNED NOT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `turno` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zona` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total_horas` int DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `profesor_id` bigint(20) UNSIGNED NOT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `turno` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zona` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_horas` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -975,11 +1040,11 @@ INSERT INTO `profesor_otros` (`id`, `profesor_id`, `institucion`, `turno`, `zona
 --
 
 CREATE TABLE `profesor_trabajos` (
-  `id` bigint UNSIGNED NOT NULL,
-  `profesor_id` bigint UNSIGNED NOT NULL,
-  `institucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gestion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cargo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `profesor_id` bigint(20) UNSIGNED NOT NULL,
+  `institucion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gestion` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cargo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1012,26 +1077,26 @@ INSERT INTO `profesor_trabajos` (`id`, `profesor_id`, `institucion`, `gestion`, 
 --
 
 CREATE TABLE `razon_socials` (
-  `id` bigint UNSIGNED NOT NULL,
-  `codigo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alias` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nro_resolucion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo_sie` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_ue` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciudad` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_distrito` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `desc_distrito` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nit` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_aut` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cel` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `casilla` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `web` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `actividad_economica` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `codigo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nro_resolucion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_sie` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_ue` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudad` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_distrito` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc_distrito` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nit` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_aut` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `casilla` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `web` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `actividad_economica` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1050,9 +1115,9 @@ INSERT INTO `razon_socials` (`id`, `codigo`, `nombre`, `alias`, `nro_resolucion`
 --
 
 CREATE TABLE `trimestre_actividads` (
-  `id` bigint UNSIGNED NOT NULL,
-  `ct_id` bigint UNSIGNED NOT NULL,
-  `area` int NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ct_id` bigint(20) UNSIGNED NOT NULL,
+  `area` int(11) NOT NULL,
   `a1` double(8,2) NOT NULL,
   `a2` double(8,2) NOT NULL,
   `a3` double(8,2) NOT NULL,
@@ -1069,7 +1134,7 @@ CREATE TABLE `trimestre_actividads` (
 --
 
 INSERT INTO `trimestre_actividads` (`id`, `ct_id`, `area`, `a1`, `a2`, `a3`, `a4`, `a5`, `a6`, `promedio`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
+(1, 1, 1, 90.00, 90.00, 90.00, 87.00, 70.00, 0.00, 71.00, '2021-05-17 16:31:21', '2023-03-20 14:52:31'),
 (2, 1, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
 (3, 1, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
 (4, 1, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:31:21', '2021-05-17 16:31:21'),
@@ -1117,7 +1182,7 @@ INSERT INTO `trimestre_actividads` (`id`, `ct_id`, `area`, `a1`, `a2`, `a3`, `a4
 (46, 12, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (47, 12, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (48, 12, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
-(49, 13, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-18 15:55:46'),
+(49, 13, 1, 0.00, 90.00, 90.00, 89.00, 80.00, 0.00, 58.00, '2021-05-17 16:32:20', '2023-03-20 14:52:33'),
 (50, 13, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (51, 13, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
 (52, 13, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-05-17 16:32:20', '2021-05-17 16:32:20'),
@@ -1176,7 +1241,151 @@ INSERT INTO `trimestre_actividads` (`id`, `ct_id`, `area`, `a1`, `a2`, `a3`, `a4
 (105, 27, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
 (106, 27, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
 (107, 27, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
-(108, 27, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07');
+(108, 27, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2021-06-08 00:18:07', '2021-06-08 00:18:07'),
+(109, 28, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(110, 28, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(111, 28, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(112, 28, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(113, 29, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(114, 29, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(115, 29, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(116, 29, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(117, 30, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(118, 30, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(119, 30, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(120, 30, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(121, 31, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(122, 31, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(123, 31, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(124, 31, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(125, 32, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:37', '2023-03-17 15:44:37'),
+(126, 32, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(127, 32, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(128, 32, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(129, 33, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(130, 33, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(131, 33, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(132, 33, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(133, 34, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(134, 34, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(135, 34, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(136, 34, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(137, 35, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(138, 35, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(139, 35, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(140, 35, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(141, 36, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(142, 36, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(143, 36, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(144, 36, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(145, 37, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(146, 37, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(147, 37, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(148, 37, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(149, 38, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(150, 38, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(151, 38, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:38', '2023-03-17 15:44:38'),
+(152, 38, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(153, 39, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(154, 39, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(155, 39, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(156, 39, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-17 15:44:39', '2023-03-17 15:44:39'),
+(157, 40, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(158, 40, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(159, 40, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(160, 40, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(161, 41, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(162, 41, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(163, 41, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(164, 41, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(165, 42, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(166, 42, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(167, 42, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(168, 42, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(169, 43, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(170, 43, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:18', '2023-03-20 14:51:18'),
+(171, 43, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(172, 43, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(173, 44, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(174, 44, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(175, 44, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(176, 44, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(177, 45, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(178, 45, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(179, 45, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(180, 45, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(181, 46, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(182, 46, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(183, 46, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(184, 46, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(185, 47, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(186, 47, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(187, 47, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(188, 47, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(189, 48, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(190, 48, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(191, 48, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(192, 48, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(193, 49, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(194, 49, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(195, 49, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:19', '2023-03-20 14:51:19'),
+(196, 49, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(197, 50, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(198, 50, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(199, 50, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(200, 50, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(201, 51, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(202, 51, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(203, 51, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(204, 51, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 14:51:20', '2023-03-20 14:51:20'),
+(205, 52, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(206, 52, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(207, 52, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(208, 52, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(209, 53, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(210, 53, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(211, 53, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(212, 53, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(213, 54, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(214, 54, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(215, 54, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:37', '2023-03-20 17:25:37'),
+(216, 54, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(217, 55, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(218, 55, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(219, 55, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(220, 55, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(221, 56, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(222, 56, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(223, 56, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(224, 56, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(225, 57, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(226, 57, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(227, 57, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(228, 57, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(229, 58, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(230, 58, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(231, 58, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(232, 58, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(233, 59, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(234, 59, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(235, 59, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(236, 59, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(237, 60, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(238, 60, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(239, 60, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(240, 60, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:38', '2023-03-20 17:25:38'),
+(241, 61, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(242, 61, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(243, 61, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(244, 61, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(245, 62, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(246, 62, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(247, 62, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(248, 62, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(249, 63, 1, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(250, 63, 2, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(251, 63, 3, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39'),
+(252, 63, 4, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '2023-03-20 17:25:39', '2023-03-20 17:25:39');
 
 -- --------------------------------------------------------
 
@@ -1185,13 +1394,13 @@ INSERT INTO `trimestre_actividads` (`id`, `ct_id`, `area`, `a1`, `a2`, `a3`, `a4
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo` enum('ADMINISTRADOR','SECRETARIA ACADÉMICA','PROFESOR','ESTUDIANTE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo` bigint NOT NULL,
-  `estado` int NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` enum('ADMINISTRADOR','SECRETARIA ACADÉMICA','PROFESOR','ESTUDIANTE','TUTOR') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo` bigint(20) NOT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1209,18 +1418,33 @@ INSERT INTO `users` (`id`, `name`, `password`, `tipo`, `foto`, `codigo`, `estado
 (6, 'MSM500002', '$2y$10$jIhY.u1NgXdzy4IFuIIdSO6gmr2Rd9Xv7muiwPvQZsGZNaYVjvgiq', 'ESTUDIANTE', 'MARTHA1620762372.jpg', 500002, 1, '2021-05-11 19:46:12', '2021-05-24 21:00:56'),
 (7, 'GPC200002', '$2y$10$AR2NwOmo9.hVTljXj8iwhe7QhB9vk9NZtkwYPqa4Dl3dvzZXLT44S', 'PROFESOR', 'user_default.png', 200002, 1, '2021-05-14 16:02:50', '2021-05-14 16:02:50'),
 (8, 'MGQ200003', '$2y$10$lj1/8tgbIsg/gcPryeyHq.2asdPdAtKj0vIgi.PcWwdCRp.i5B9Ki', 'PROFESOR', 'user_default.png', 200003, 1, '2021-05-17 15:21:21', '2021-05-17 15:21:21'),
-(9, 'EH500003', '$2y$10$GJ1JbXsS3I64NofwDWt5oe8WdOHjWM7TxbxY2MgmyDTbRHDwZ1liC', 'ESTUDIANTE', 'ELVIS1621265086.jpg', 500003, 1, '2021-05-17 15:24:46', '2021-05-24 21:00:57'),
+(9, 'EH500003', '$2y$10$GJ1JbXsS3I64NofwDWt5oe8WdOHjWM7TxbxY2MgmyDTbRHDwZ1liC', 'ESTUDIANTE', 'EH5000031678208110.png', 500003, 1, '2021-05-17 15:24:46', '2023-03-07 16:55:10'),
 (10, 'AFG100003', '$2y$10$9O76DVJ4chKAxnrs7neVletp0h3pcfSz1CVgs0UjDR54WKuCbYTWS', 'ADMINISTRADOR', 'user_default.png', 100003, 1, '2021-05-18 16:03:43', '2021-05-18 16:03:43'),
 (11, 'GGP200004', '$2y$10$lPSeibQbMLuykZKrfExtP.B4EZJJzUD4ymmwZA8NAN2VFi0u1sMci', 'PROFESOR', 'user_default.png', 200004, 1, '2021-05-18 16:04:31', '2021-05-18 16:04:31'),
 (12, 'CMC500004', '$2y$10$OzWLBMlmykWgI4PqUGoAVOtP8whbTHWxhKotai7/0S1XK53OcU9Zi', 'ESTUDIANTE', 'CHOQUE1621353964.jpg', 500004, 1, '2021-05-18 16:06:04', '2021-05-24 21:00:57'),
 (13, 'CPP100004', '$2y$10$H4.hDdVH3BmYB//hW5L30eCuuCmf1g94oaulCfkk71zfvfu9HvqSi', 'SECRETARIA ACADÉMICA', 'user_default.png', 100004, 1, '2021-06-07 23:39:58', '2021-06-07 23:39:58'),
 (14, 'FMC500005', '$2y$10$OABo/OquQM5qXBLlBQY/penTQMTOVZz1eDM8gs7IQejdK90klBXVy', 'ESTUDIANTE', 'FLORES1623110290.png', 500005, 1, '2021-06-07 23:58:10', '2021-06-07 23:58:10'),
 (15, 'DCV200005', '$2y$10$8Sj1i9RKHmeGAIRuLf5kueU8jqrZxPnoKiiie0pLZerWVAcMlCRwq', 'PROFESOR', 'user_default.png', 200005, 1, '2021-06-08 00:02:29', '2021-06-08 00:02:29'),
-(16, 'MP100005', '$2y$10$J0THlRFdkJUKdVJ.13n18uXaYJdGP53NVlIqH55k2KXozXoKUILjS', 'ADMINISTRADOR', 'user_default.png', 100005, 1, '2022-03-28 18:37:51', '2022-03-28 18:37:51');
+(16, 'MP100005', '$2y$10$J0THlRFdkJUKdVJ.13n18uXaYJdGP53NVlIqH55k2KXozXoKUILjS', 'ADMINISTRADOR', 'user_default.png', 100005, 1, '2022-03-28 18:37:51', '2022-03-28 18:37:51'),
+(36, '100001JH', '$2y$10$fn9Kg.wGOpEsmhoHhGGEheuQppmj4LefJL7PJ6B5y54qlwKPrOWkO', 'TUTOR', 'user_default.png', 100001, 1, '2023-03-21 15:30:57', '2023-03-21 15:30:57'),
+(37, '100002MS', '$2y$10$NiIAdp1G.e.3skRSXuFnrOMn8Eu1rlOWeqjQMf.W2p5/dPVkZ.O82', 'TUTOR', 'user_default.png', 100002, 1, '2023-03-21 15:30:57', '2023-03-21 15:30:57'),
+(38, '100003CV', '$2y$10$1hB5eJx6oI2ypPU1MU2hvOXoEwJouanrPJ5dlUU8Oy8yrtw71XbMi', 'TUTOR', 'user_default.png', 100003, 1, '2023-03-21 15:31:01', '2023-03-21 15:31:01'),
+(39, '100004MC', '$2y$10$l1XML.J3tsv249C2LJIAAuZgwK826PV5FIAk5.aJOWDBjvdYkTEhy', 'TUTOR', 'user_default.png', 100004, 1, '2023-03-21 15:31:01', '2023-03-21 15:31:01'),
+(40, '100005VC', '$2y$10$H/drSHCiUk0L/CeeZtKTUeNTErl4Bc5eiNJOmHCfFD0m5JWbMHVR6', 'TUTOR', 'user_default.png', 100005, 1, '2023-03-21 15:31:04', '2023-03-21 15:31:04'),
+(41, '100006TF', '$2y$10$6BqGYAptq9.XBZYi192rjeQ46WbX55uVGkV8pd9P.6XDjgiy18fdu', 'TUTOR', 'user_default.png', 100006, 1, '2023-03-21 15:31:04', '2023-03-21 15:31:04'),
+(42, '100007MS', '$2y$10$SnpmnaW8WWbhE17oa1JHn.ooGTJe1EDce4oo85LF06YbIA/0OF3ry', 'TUTOR', 'user_default.png', 100007, 1, '2023-03-21 15:31:07', '2023-03-21 15:31:07'),
+(43, '100008JV', '$2y$10$6pyC5/ds1bw5PmPcFV76jevZFwr.c3j4qfFnME6EqRzTsuPO/O32C', 'TUTOR', 'user_default.png', 100008, 1, '2023-03-21 15:31:11', '2023-03-21 15:31:11'),
+(44, '100009MM', '$2y$10$Z3ocDazs4lzhrWatB56fsOETUvInCIGmUOPw3T9DVdmHd.z4nLllm', 'TUTOR', 'user_default.png', 100009, 1, '2023-03-21 15:31:11', '2023-03-21 15:31:11');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `actividad_profesors`
+--
+ALTER TABLE `actividad_profesors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `administrativos`
@@ -1265,13 +1489,6 @@ ALTER TABLE `areas`
   ADD KEY `areas_campo_id_foreign` (`campo_id`);
 
 --
--- Indices de la tabla `asistencias`
---
-ALTER TABLE `asistencias`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `asistencias_user_id_foreign` (`user_id`);
-
---
 -- Indices de la tabla `calificacions`
 --
 ALTER TABLE `calificacions`
@@ -1288,6 +1505,24 @@ ALTER TABLE `calificacion_trimestres`
 -- Indices de la tabla `campos`
 --
 ALTER TABLE `campos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `chat_desempenos`
+--
+ALTER TABLE `chat_desempenos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `desempeno_estudiantes`
+--
+ALTER TABLE `desempeno_estudiantes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `desempeno_notificacions`
+--
+ALTER TABLE `desempeno_notificacions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1326,22 +1561,9 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `pago_estudiantes`
---
-ALTER TABLE `pago_estudiantes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pago_estudiantes_estudiante_id_foreign` (`estudiante_id`);
-
---
 -- Indices de la tabla `paralelos`
 --
 ALTER TABLE `paralelos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `plan_pagos`
---
-ALTER TABLE `plan_pagos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1411,166 +1633,172 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `actividad_profesors`
+--
+ALTER TABLE `actividad_profesors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de la tabla `administrativos`
 --
 ALTER TABLE `administrativos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `administrativo_cursos`
 --
 ALTER TABLE `administrativo_cursos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `administrativo_estudios`
 --
 ALTER TABLE `administrativo_estudios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `administrativo_otros`
 --
 ALTER TABLE `administrativo_otros`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `administrativo_trabajos`
 --
 ALTER TABLE `administrativo_trabajos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `asistencias`
---
-ALTER TABLE `asistencias`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacions`
 --
 ALTER TABLE `calificacions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacion_trimestres`
 --
 ALTER TABLE `calificacion_trimestres`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `campos`
 --
 ALTER TABLE `campos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `chat_desempenos`
+--
+ALTER TABLE `chat_desempenos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT de la tabla `desempeno_estudiantes`
+--
+ALTER TABLE `desempeno_estudiantes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `desempeno_notificacions`
+--
+ALTER TABLE `desempeno_notificacions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantes`
 --
 ALTER TABLE `estudiantes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcions`
 --
 ALTER TABLE `inscripcions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `materia_grados`
 --
 ALTER TABLE `materia_grados`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT de la tabla `pago_estudiantes`
---
-ALTER TABLE `pago_estudiantes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `paralelos`
 --
 ALTER TABLE `paralelos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `plan_pagos`
---
-ALTER TABLE `plan_pagos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `profesors`
 --
 ALTER TABLE `profesors`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_cursos`
 --
 ALTER TABLE `profesor_cursos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_estudios`
 --
 ALTER TABLE `profesor_estudios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_materias`
 --
 ALTER TABLE `profesor_materias`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_otros`
 --
 ALTER TABLE `profesor_otros`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_trabajos`
 --
 ALTER TABLE `profesor_trabajos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `razon_socials`
 --
 ALTER TABLE `razon_socials`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `trimestre_actividads`
 --
 ALTER TABLE `trimestre_actividads`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Restricciones para tablas volcadas
@@ -1613,12 +1841,6 @@ ALTER TABLE `areas`
   ADD CONSTRAINT `areas_campo_id_foreign` FOREIGN KEY (`campo_id`) REFERENCES `campos` (`id`);
 
 --
--- Filtros para la tabla `asistencias`
---
-ALTER TABLE `asistencias`
-  ADD CONSTRAINT `asistencias_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Filtros para la tabla `calificacions`
 --
 ALTER TABLE `calificacions`
@@ -1648,12 +1870,6 @@ ALTER TABLE `materias`
 --
 ALTER TABLE `materia_grados`
   ADD CONSTRAINT `materia_grados_materia_id_foreign` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`id`);
-
---
--- Filtros para la tabla `pago_estudiantes`
---
-ALTER TABLE `pago_estudiantes`
-  ADD CONSTRAINT `pago_estudiantes_estudiante_id_foreign` FOREIGN KEY (`estudiante_id`) REFERENCES `estudiantes` (`id`);
 
 --
 -- Filtros para la tabla `profesors`

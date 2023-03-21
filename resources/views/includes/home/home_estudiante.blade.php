@@ -6,7 +6,6 @@
                     <span id="txtFecha"></span>
                     <span id="txtHora"></span>
                 </div>
-                <h4>Bienvenido(a) {{Auth::user()->estudiante->nombre}} {{Auth::user()->estudiante->paterno}} {{Auth::user()->estudiante->materno}}</h4>
             </div>
         </div>
     </div>

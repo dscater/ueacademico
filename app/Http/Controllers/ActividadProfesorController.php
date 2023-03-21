@@ -33,6 +33,16 @@ class ActividadProfesorController extends Controller
         return view('actividad_profesors.index', compact('profesor', "array_gestiones"));
     }
 
+    public function lista()
+    {
+        $actividad_profesors = ActividadProfesor::orderBy("fecha", "desc")
+            ->orderBy("created_at", "desc")
+            ->get();
+
+        return view('actividad_profesors.lista', compact('actividad_profesors'));
+    }
+
+
     public function getActividadesProfesor(Profesor $profesor, Request $request)
     {
         $gestion = $request->gestion;

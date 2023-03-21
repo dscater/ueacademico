@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profesors/asistencias/{profesor}', 'ProfesorController@asistencias')->name('profesors.asistencias');
 
     // ACTIVIDAD PROFESORES
+    Route::get('actividad_profesors/lista', 'ActividadProfesorController@lista')->name('actividad_profesors.lista');
+
     Route::get('actividad_profesors/{profesor}', 'ActividadProfesorController@index')->name('actividad_profesors.index');
 
     Route::get('actividad_profesors/getActividadesProfesor/{profesor}', 'ActividadProfesorController@getActividadesProfesor')->name('actividad_profesors.getActividadesProfesor');
@@ -80,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('actividad_profesors/destroy/{actividad_profesor}', 'ActividadProfesorController@destroy')->name('actividad_profesors.destroy');
 
     // DESEMPEÑO ESTUDIANTES
+    Route::get('desempeno_estudiantes/getNotificaciones', 'DesempenoEstudianteController@getNotificaciones')->name('desempeno_estudiantes.getNotificaciones');
+
     Route::get('desempeno_estudiantes', 'DesempenoEstudianteController@index')->name('desempeno_estudiantes.index');
 
     Route::get('desempeno_estudiantes/create', 'DesempenoEstudianteController@create')->name('desempeno_estudiantes.create');
@@ -91,7 +95,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('desempeno_estudiantes/update/{desempeno_estudiante}', 'DesempenoEstudianteController@update')->name('desempeno_estudiantes.update');
 
     Route::delete('desempeno_estudiantes/destroy/{desempeno_estudiante}', 'DesempenoEstudianteController@destroy')->name('desempeno_estudiantes.destroy');
-
 
     // DESEMPEÑO ESTUDIANTES CHAT
     Route::get('desempeno_estudiantes/chat_desempeno/getMensajes', 'ChatDesempenoController@getMensajes')->name('chat_desempeno.getMensajes');
@@ -165,6 +168,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('areas/destroy/{area}', 'AreaController@destroy')->name('areas.destroy');
 
     // MATERIAS
+    Route::get('materias/getMateriasFiltro', 'MateriaController@getMateriasFiltro')->name('materias.getMateriasFiltro');
+
     Route::get('materias', 'MateriaController@index')->name('materias.index');
 
     Route::get('materias/create', 'MateriaController@create')->name('materias.create');
@@ -299,6 +304,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('reportes/boleta_calificaciones', 'ReporteController@boleta_calificaciones')->name('reportes.boleta_calificaciones');
 
+    Route::get('reportes/boletin', 'ReporteController@boletin')->name('reportes.boletin');
+
     Route::get('reportes/centralizador_calificacions', 'ReporteController@centralizador_calificacions')->name('reportes.centralizador_calificacions');
 
     Route::get('reportes/historial_academico', 'ReporteController@historial_academico')->name('reportes.historial_academico');
@@ -310,4 +317,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('reportes/ingresos_economicos', 'ReporteController@ingresos_economicos')->name('reportes.ingresos_economicos');
 
     Route::get('reportes/asistencias', 'ReporteController@asistencias')->name('reportes.asistencias');
+    Route::get('reportes/actividad_profesors', 'ReporteController@actividad_profesors')->name('reportes.actividad_profesors');
+    Route::get('reportes/desempeno_academico', 'ReporteController@desempeno_academico')->name('reportes.desempeno_academico');
+    Route::get('reportes/notificacions', 'ReporteController@notificacions')->name('reportes.notificacions');
+
+    Route::get('reportes/grafico_inscripcions', 'ReporteController@grafico_inscripcions')->name('reportes.grafico_inscripcions');
+    Route::get('reportes/grafico_inscripcions_datos', 'ReporteController@grafico_inscripcions_datos')->name('reportes.grafico_inscripcions_datos');
 });

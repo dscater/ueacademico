@@ -5,3 +5,10 @@
         <p>Desempeño académico</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('reportes.index') }}" class="nav-link {{ request()->is('reportes*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <p>Reportes</p>
+    </a>
+</li>

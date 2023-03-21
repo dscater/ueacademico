@@ -25,11 +25,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            {{-- <h3 class="card-title"></h3> --}}
-                            <a href="{{ route('desempeno_estudiantes.create') }}" class="btn btn-info"><i
-                                    class="fa fa-plus"></i> Nuevo</a>
-                        </div>
+                        @if (Auth::user()->tipo == 'PROFESOR')
+                            <div class="card-header">
+                                {{-- <h3 class="card-title"></h3> --}}
+                                <a href="{{ route('desempeno_estudiantes.create') }}" class="btn btn-info"><i
+                                        class="fa fa-plus"></i> Nuevo</a>
+                            </div>
+                        @endif
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table data-table table-bordered table-hover">
@@ -42,7 +44,9 @@
                                         <th>Fecha</th>
                                         <th>Observaciones</th>
                                         <th>Fecha de registro</th>
-                                        <th>Opciones</th>
+                                        @if (Auth::user()->tipo == 'PROFESOR' || Auth::user()->tipo == 'TUTOR')
+                                            <th>Opciones</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,19 +62,26 @@
                                             <td>{{ $desempeno_estudiante->fecha }}</td>
                                             <td>{{ $desempeno_estudiante->observacion }}</td>
                                             <td>{{ $desempeno_estudiante->fecha_registro }}</td>
-                                            <td class="btns-opciones">
-                                                <a href="{{ route('chat_desempeno.index', $desempeno_estudiante->id) }}"
-                                                    class="ir-evaluacion"><i class="fa fa-comments" data-toggle="tooltip"
-                                                        data-placement="left" title="Chat"></i></a>
-                                                <a href="{{ route('desempeno_estudiantes.edit', $desempeno_estudiante->id) }}"
-                                                    class="modificar"><i class="fa fa-edit" data-toggle="tooltip"
-                                                        data-placement="left" title="Modificar"></i></a>
-                                                <a href="#"
-                                                    data-url="{{ route('desempeno_estudiantes.destroy', $desempeno_estudiante->id) }}"
-                                                    data-toggle="modal" data-target="#modal-eliminar" class="eliminar"><i
-                                                        class="fa fa-trash" data-toggle="tooltip" data-placement="left"
-                                                        title="Eliminar"></i></a>
-                                            </td>
+                                            @if (Auth::user()->tipo == 'PROFESOR' || Auth::user()->tipo == 'TUTOR')
+                                                <td class="btns-opciones">
+                                                    @if (Auth::user()->tipo == 'PROFESOR' || Auth::user()->tipo == 'TUTOR')
+                                                        <a href="{{ route('chat_desempeno.index', $desempeno_estudiante->id) }}"
+                                                            class="ir-evaluacion"><i class="fa fa-comments"
+                                                                data-toggle="tooltip" data-placement="left"
+                                                                title="Chat"></i></a>
+                                                    @endif
+                                                    @if (Auth::user()->tipo == 'PROFESOR')
+                                                        <a href="{{ route('desempeno_estudiantes.edit', $desempeno_estudiante->id) }}"
+                                                            class="modificar"><i class="fa fa-edit" data-toggle="tooltip"
+                                                                data-placement="left" title="Modificar"></i></a>
+                                                        <a href="#"
+                                                            data-url="{{ route('desempeno_estudiantes.destroy', $desempeno_estudiante->id) }}"
+                                                            data-toggle="modal" data-target="#modal-eliminar"
+                                                            class="eliminar"><i class="fa fa-trash" data-toggle="tooltip"
+                                                                data-placement="left" title="Eliminar"></i></a>
+                                                    @endif
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -103,24 +114,38 @@
         @endif
 
 
-        $('table.data-table').DataTable({
-            columns: [{
-                    width: "5%"
-                },
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                {
-                    width: "10%"
-                },
-            ],
-            scrollCollapse: true,
-            language: lenguaje,
-            pageLength: 25
-        });
+        @if (Auth::user()->tipo == 'PROFESOR' || Auth::user()->tipo == 'TUTOR')
+            $('table.data-table').DataTable({
+                columns: [null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    {
+                        width: "10%"
+                    },
+                ],
+                scrollCollapse: true,
+                language: lenguaje,
+                pageLength: 25
+            });
+        @else
+            $('table.data-table').DataTable({
+                columns: [null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                ],
+                scrollCollapse: true,
+                language: lenguaje,
+                pageLength: 25
+            });
+        @endif
 
 
         // ELIMINAR

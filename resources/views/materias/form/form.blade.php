@@ -30,9 +30,6 @@
             ],null,['class'=>'form-control','required','id'=>"select_nivel"]) }}
             @else
             {{ Form::select('nivel',[
-                '' =>  'Seleccione...',
-                'NIVEL INICIAL' => 'NIVEL INICIAL',
-                'PRIMARIA' => 'PRIMARIA',
                 'SECUNDARIA' => 'SECUNDARIA',
             ],null,['class'=>'form-control','required','id'=>"select_nivel"]) }}
             @endif

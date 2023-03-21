@@ -39,9 +39,6 @@
                                 <div class="form-group">
                                     <label for="">Nivel:</label>
                                     {{Form::select('nivel',[
-                                        '' => 'Seleccione...',
-                                        'NIVEL INICIAL' => 'NIVEL INICIAL',
-                                        'PRIMARIA' => 'PRIMARIA',
                                         'SECUNDARIA' => 'SECUNDARIA',
                                     ],null,['class'=>'form-control','id'=>'nivel','required'])}}
                                 </div>

@@ -56,8 +56,8 @@ class ChatDesempenoController extends Controller
                 $existen_mensajes = 2;
             }
         } else {
-            $mensajes = ChatDesempeno::where([["emisor_id", $receptor_id], ["receptor_id", $receptor_id]])
-                ->orWhere([["emisor_id", $receptor_id], ["receptor_id", $user->id]])
+            $mensajes = ChatDesempeno::where([["emisor_id", $receptor_id], ["receptor_id", $user->id]])
+                ->orWhere([["emisor_id", $user->id], ["receptor_id", $receptor_id]])
                 ->get();
             $existen_mensajes = 1;
             $html = view("chat_desempeno.parcial.mensajes", compact("mensajes"))->render();
@@ -69,10 +69,21 @@ class ChatDesempenoController extends Controller
             }
         }
 
+
+        $lista_mensajes = ChatDesempeno::where([["emisor_id", $receptor_id], ["receptor_id", $user->id]])
+            ->orWhere([["emisor_id", $user->id], ["receptor_id", $receptor_id]])
+            ->get();
+
         // marcar vistos si elusuario es receptor
         ChatDesempeno::where("receptor_id", $user->id)->where("emisor_id", $receptor_id)->update(["visto" => 1]);
+        $mensajes_actuales = [];
+        if (count($lista_mensajes) > 0) {
+            foreach ($lista_mensajes as $value) {
+                $mensajes_actuales[] = ["id" => $value->id, "hace" => $value->created_at->diffForHumans()];
+            }
+        }
 
-        return response()->JSON(["html" => $html, "existen_mensajes" => $existen_mensajes]);
+        return response()->JSON(["html" => $html, "existen_mensajes" => $existen_mensajes, "mensajes_actuales" => $mensajes_actuales]);
     }
 
     public function store(DesempenoEstudiante $desempeno_estudiante, Request $request)

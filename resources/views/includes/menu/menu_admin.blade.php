@@ -13,9 +13,25 @@
 </li>
 
 <li class="nav-item">
+    <a href="{{ route('desempeno_estudiantes.index') }}"
+        class="nav-link {{ request()->is('desempeno_estudiantes*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-list-alt"></i>
+        <p>Desempeño académico</p>
+    </a>
+</li>
+
+<li class="nav-item">
     <a href="{{ route('profesors.index') }}" class="nav-link {{ request()->is('profesors*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-users"></i>
         <p>Profesores</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{ route('actividad_profesors.lista') }}"
+        class="nav-link {{ request()->is('actividad_profesors*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-list-alt"></i>
+        <p>Actividades profesores</p>
     </a>
 </li>
 

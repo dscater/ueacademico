@@ -12,31 +12,69 @@
 
 <div class="col-md-4">
     <div class="boton_reporte">
-        <a href="#" data-toggle="modal" data-target="#m_kardex_personal" class="btn btn-info">Kardex del Personal</a>
+        <a href="#" data-toggle="modal" data-target="#m_kardex_personal" class="btn btn-info">Kardex del
+            Personal</a>
     </div>
 </div>
 
-<div class="col-md-4">
+{{-- <div class="col-md-4">
     <div class="boton_reporte">
         <a href="#" data-toggle="modal" data-target="#m_boleta_calificaciones" class="btn btn-info">Boleta de Calificaciones</a>
     </div>
-</div>
+</div> --}}
 
 <div class="col-md-4">
     <div class="boton_reporte">
-        <a href="#" data-toggle="modal" data-target="#m_centralizador_calificacions" class="btn btn-info">Centralizador de Calificaciones</a>
+        <a href="#" data-toggle="modal" data-target="#m_boletin" class="btn btn-info">Boletín de
+            calificaciones</a>
     </div>
 </div>
 
 <div class="col-md-4">
     <div class="boton_reporte">
-        <a href="#" data-toggle="modal" data-target="#m_historial_academico" class="btn btn-info">Historial Académico</a>
+        <a href="#" data-toggle="modal" data-target="#m_centralizador_calificacions"
+            class="btn btn-info">Centralizador de Calificaciones</a>
     </div>
 </div>
 
 <div class="col-md-4">
     <div class="boton_reporte">
-        <a href="#" data-toggle="modal" data-target="#m_asignacion_materias" class="btn btn-info">Asignación de Materias</a>
+        <a href="#" data-toggle="modal" data-target="#m_historial_academico" class="btn btn-info">Historial
+            Académico</a>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="boton_reporte">
+        <a href="#" data-toggle="modal" data-target="#m_asignacion_materias" class="btn btn-info">Asignación de
+            Materias</a>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="boton_reporte">
+        <a href="#" data-toggle="modal" data-target="#m_actividad_profesors" class="btn btn-info">Actividades de
+            Profesores</a>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="boton_reporte">
+        <a href="#" data-toggle="modal" data-target="#m_desempeno_academico" class="btn btn-info">Desempeño
+            académico</a>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="boton_reporte">
+        <a href="#" data-toggle="modal" data-target="#m_notificacions" class="btn btn-info">Notificaciones de
+            desempeño académico de estudiantes</a>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="boton_reporte">
+        <a href="{{ route('reportes.grafico_inscripcions') }}" class="btn btn-success">Gráfico de inscripciones</a>
     </div>
 </div>
 

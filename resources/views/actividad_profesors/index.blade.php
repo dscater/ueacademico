@@ -15,7 +15,7 @@
                     <ol class="breadcrumb float-sm-right bg-white">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('profesors.index') }}">Profesores</a></li>
-                        <li class="breadcrumb-item active">Profesores Materias</li>
+                        <li class="breadcrumb-item active">Profesores actividades</li>
                     </ol>
                 </div>
             </div>

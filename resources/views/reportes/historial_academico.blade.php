@@ -118,7 +118,7 @@
                 <td class="derecha">NIVEL:</td>
                 <td>{{$nivel}}</td>
                 <td class="derecha">PARALELO:</td>
-                <td>{{$paralelo}}</td>
+                <td>{{$grado}} {{$paralelo}}</td>
             </tr>
             <tr>
                 <td class="derecha">FECHA:</td>

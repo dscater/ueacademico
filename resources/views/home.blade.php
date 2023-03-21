@@ -42,6 +42,18 @@
         @if(Auth::user()->tipo == 'SECRETARIA ACADÉMICA')
         @include('includes.home.home_secretaria')
         @endif
+        @if(Auth::user()->tipo == 'TUTOR')
+        @include('includes.home.home_tutor')
+        @endif
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 class="font-weight-bold">{{ App\RazonSocial::first()->nombre}} <br> <span class="font-weight-normal">Bienvenid@ {{Auth::user()->name}}</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div><!--/. container-fluid -->
 </section>
 <!-- /.content -->
@@ -114,7 +126,7 @@
         $('#formEliminar').prop('action',url);
     });
 </script>
-<script src="{{asset('js/home.js')}}"></script>
+{{-- <script src="{{asset('js/home.js')}}"></script> --}}
 <script src="{{asset('js/reloj.js')}}"></script>
 @endsection
 

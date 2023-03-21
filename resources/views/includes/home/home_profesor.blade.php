@@ -12,20 +12,13 @@
         <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-12 col-md-12">
         <div class="card">
             <div class="card-body text-center">
                 <div id="contenedorFecha" style="flex-direction: column;">
                     <span id="txtFecha"></span>
                     <span id="txtHora"></span>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <h4>Bienvenido(a) {{Auth::user()->profesor->nombre}} {{Auth::user()->profesor->paterno}} {{Auth::user()->profesor->materno}}</h4>
             </div>
         </div>
     </div>

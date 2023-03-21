@@ -1,25 +1,39 @@
-<div class="modal fade" id="m_historial_academico">
+<div class="modal fade" id="m_boletin">
     <div class="modal-dialog">
         <div class="modal-content  bg-sucess">
             <div class="modal-header">
-                <h4 class="modal-title">Historial Académico</h4>
+                <h4 class="modal-title">Boletín de Calificaciones</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 {!! Form::open([
-                    'route' => 'reportes.historial_academico',
+                    'route' => 'reportes.boletin',
                     'method' => 'get',
                     'target' => '_blank',
-                    'id' => 'formhistorial_academico',
+                    'id' => 'formboleta_calificaciones',
                 ]) !!}
                 <div class="row">
                     @if (Auth::user()->tipo != 'TUTOR')
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label>Filtro:</label>
+                                <select class="form-control" name="filtro" id="filtro">
+                                    <option value="todos">Todos</option>
+                                    <option value="individual">Individual</option>
+                                </select>
+                            </div>
+                        </div>
+                    @else
+                        <input type="hidden" name="filtro" id="filtro" value="individual">
+                    @endif
+
+                    @if (Auth::user()->tipo != 'TUTOR')
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label>Estudiante:</label>
-                                {{ Form::select('estudiante', $array_estudiantes, null, ['class' => 'form-control select2', 'id' => 'estudiante', 'required']) }}
+                                {{ Form::select('estudiante', $array_estudiantes, null, ['class' => 'form-control select2', 'id' => 'estudiante']) }}
                             </div>
                         </div>
                     @else
@@ -30,6 +44,7 @@
                             </div>
                         </div>
                     @endif
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Nivel:</label>
@@ -82,7 +97,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-info" id="btnhistorial_academico">Generar reporte</button>
+                <button type="submit" class="btn btn-info" id="btnboleta_calificaciones">Generar reporte</button>
                 {!! Form::close() !!}
             </div>
         </div>

@@ -24,7 +24,7 @@ class Profesor extends Model
     {
         $full_name = $this->nombre . ' ' . $this->paterno;
         if ($this->materno) {
-            $full_name .= $this->materno;
+            $full_name .= ' '.$this->materno;
         }
         return $full_name;
     }

@@ -192,6 +192,8 @@
         let mensaje_txt = $("#mensaje_txt");
         let btnEnviar = $("#btnEnviar");
         let intervaloNuevos = null;
+        let mensajes_actuales = null;
+        let contador_tiempo = 0;
         $(document).ready(function() {
             getMensajes();
             select_receptor.change(getMensajes);
@@ -257,6 +259,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
+                    contador_tiempo++;
                     if (response.existen_mensajes == 1) {
                         contendor_mensajes.append(response.html);
                     }
@@ -279,6 +282,22 @@
                     if (valor_ultimo_id != 0) {
                         quitaSinMensajes();
                     }
+                    if (response.mensajes_actuales.length > 0) {
+                        mensajes_actuales = response.mensajes_actuales;
+                        if (contador_tiempo == 60) {
+                            actualizaHoras();
+                            contador_tiempo = 0;
+                        }
+                    }
+                }
+            });
+        }
+
+        function actualizaHoras() {
+            mensajes_actuales.forEach(elem => {
+                let mensaje = contendor_mensajes.find('.mensaje[data-id="' + elem.id + '"]');
+                if (mensaje.length > 0) {
+                    mensaje.find(".fecha").text(elem.hace);
                 }
             });
         }
@@ -300,12 +319,14 @@
                         dataType: "json",
                         success: function(response) {
                             mensaje_txt.val("");
-                            ultimo_id = response.mensaje.id;
+                            valor_ultimo_id = response.mensaje.id;
                             contendor_mensajes.append(response.html_mensaje);
                             setTimeout(() => {
                                 posicionarScroll();
                             }, 100);
-                            intervaloNuevos = setInterval(getNuevosMensajes, 1500);
+                            setTimeout(function() {
+                                intervaloNuevos = setInterval(getNuevosMensajes, 1500);
+                            }, 1500)
                         }
                     });
                 } else {

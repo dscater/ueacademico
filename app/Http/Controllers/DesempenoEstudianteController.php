@@ -20,15 +20,17 @@ class DesempenoEstudianteController extends Controller
         if (isset($request->id)) {
             if (Auth::user()->tipo == 'PROFESOR') {
                 $desempeno_estudiantes = DesempenoEstudiante::where("user_id", $request->id)->get();
-            } elseif (Auth::user()->tipo == 'TUTOR') {
-                if (Auth::user()->user_tutor) {
-                    $estudiante = Estudiante::where("user_tutor_id", Auth::user()->id)->get()->first();
-                }
-                if (Auth::user()->user_madre) {
-                    $estudiante = Estudiante::where("user_madre_id", Auth::user()->id)->get()->first();
-                }
-                $desempeno_estudiantes = DesempenoEstudiante::where("estudiante_id", $estudiante->id)->get();
             }
+        }
+        if (Auth::user()->tipo == 'TUTOR') {
+            if (Auth::user()->user_tutor) {
+                $estudiante = Estudiante::where("user_tutor_id", Auth::user()->id)->get()->first();
+            }
+            if (Auth::user()->user_madre) {
+                $estudiante = Estudiante::where("user_madre_id", Auth::user()->id)->get()->first();
+            }
+            Auth::user()->desempeno_notificacions()->update(["visto" => 1]);
+            $desempeno_estudiantes = DesempenoEstudiante::where("estudiante_id", $estudiante->id)->get();
         }
         return view('desempeno_estudiantes.index', compact('desempeno_estudiantes'));
     }
@@ -167,5 +169,32 @@ class DesempenoEstudianteController extends Controller
         $desempeno_estudiante->desempeno_notificacions()->delete();
         $desempeno_estudiante->delete();
         return redirect()->route('desempeno_estudiantes.index', ["id" => Auth::user()->id])->with('bien', 'Registro eliminado correctamente');
+    }
+
+    public function getNotificaciones(Request $request)
+    {
+        $ultimo_id = $request->ultimo_id;
+        $no_vistos = count(DesempenoNotificacion::where("user_id", Auth::user()->id)->where("visto", 0)->get());
+        $total = count(DesempenoNotificacion::where("user_id", Auth::user()->id)->get());
+        $notificaciones = DesempenoNotificacion::where("user_id", Auth::user()->id)->where("visto", 0)->orderBy("created_at", "desc")->get();
+        if ($ultimo_id != 0) {
+            $notificaciones = DesempenoNotificacion::where("user_id", Auth::user()->id)->where("visto", 0)->where("id", ">", $ultimo_id)->orderBy("created_at", "desc")->get();
+        }
+
+        $html = "";
+        $ultimo_id = 0;
+        if (count($notificaciones) > 0) {
+            $ultimo_id = $notificaciones[0]->id;
+            $html = view("desempeno_estudiantes.parcial.notificaciones", compact("notificaciones"))->render();
+        }
+        if ($total > 0) {
+            $ultimo_id = DesempenoNotificacion::where("user_id", Auth::user()->id)->get()->last()->id;
+        }
+
+        return response()->JSON([
+            "no_vistos" => $no_vistos,
+            "html" => $html,
+            "ultimo_id" => $ultimo_id
+        ]);
     }
 }

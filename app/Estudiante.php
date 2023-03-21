@@ -29,7 +29,7 @@ class Estudiante extends Model
     {
         $full_name = $this->nombre . ' ' . $this->paterno;
         if ($this->materno) {
-            $full_name .= $this->materno;
+            $full_name .= ' '.$this->materno;
         }
         return $full_name;
     }
@@ -38,7 +38,7 @@ class Estudiante extends Model
     {
         $full_name = $this->nom_padre_tutor . ' ' . $this->app_padre_tutor;
         if ($this->materno) {
-            $full_name .= $this->apm_padre_tutor;
+            $full_name .= ' '.$this->apm_padre_tutor;
         }
         return $full_name;
     }
@@ -48,7 +48,7 @@ class Estudiante extends Model
         if ($this->nom_madre && $this->app_madre) {
             $full_name = $this->nom_madre . ' ' . $this->app_madre;
             if ($this->materno) {
-                $full_name .= $this->apm_madre;
+                $full_name .= ' '.$this->apm_madre;
             }
             return $full_name;
         }
