@@ -121,18 +121,16 @@
                                     'id' => 'form_foto',
                                     'files' => 'true',
                                 ]) !!}
-                                @if (Auth::user()->tipo != 'TUTOR')
-                                    <div class="col-md-12">
-                                        <div class="form-line archivos">
-                                            <span id="info"></span>
-                                            <label for="foto" class="subir">
-                                                <span>Cambiar foto de perfil</span>
-                                            </label>
-                                            <input type="file" name="foto" id="foto" accept="image/*"
-                                                onchange='cambiar()'>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-line archivos">
+                                        <span id="info"></span>
+                                        <label for="foto" class="subir">
+                                            <span>Cambiar foto de perfil</span>
+                                        </label>
+                                        <input type="file" name="foto" id="foto" accept="image/*"
+                                            onchange='cambiar()'>
                                     </div>
-                                @endif
+                                </div>
                                 {!! Form::close() !!}
                                 <button class="btn btn-danger" id="cancelar" style="display: none">Cancelar</button>
                                 <button class="btn btn-danger" id="guardar_img" style="display: none">Guardar

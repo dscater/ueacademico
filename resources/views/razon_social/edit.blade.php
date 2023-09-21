@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Actividad económica*</label>
+                                        <label>Actividad*</label>
                                         {{Form::text('actividad_economica',null,['class'=>'form-control','required'])}}
                                     </div>
                                 </div>

@@ -34,7 +34,15 @@ class ChatDesempenoController extends Controller
             ->get();
         $html = view("chat_desempeno.parcial.mensajes", compact("mensajes"))->render();
         // return "Sin mensjaes";
-        return response()->JSON($html);
+        $existen_mensajes = false;
+        if (count($mensajes) > 0) {
+            $existen_mensajes = true;
+        }
+
+        return response()->JSON([
+            "sw" => $existen_mensajes,
+            "html" => $html
+        ]);
     }
 
 

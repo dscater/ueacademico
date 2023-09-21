@@ -230,7 +230,7 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        contendor_mensajes.html(response);
+                        contendor_mensajes.html(response.html);
                         ultimo_mensaje = contendor_mensajes.children(".mensaje:last-child");
                         if (ultimo_mensaje) {
                             valor_ultimo_id = ultimo_mensaje.attr("data-id");
@@ -240,7 +240,11 @@
                             intervaloNuevos = setInterval(getNuevosMensajes, 1500);
                         }, 100);
                         cargando_chat.addClass("oculto");
-                        quitaSinMensajes();
+                        if (response.sw) {
+                            quitaSinMensajes();
+                        } else {
+                            valor_ultimo_id = 0;
+                        }
                     }
                 });
             } else {
@@ -252,9 +256,8 @@
         function getNuevosMensajes() {
             $.ajax({
                 type: "GET",
-                url: $("#urlGetNuevosMensajes").val(),
+                url: $("#urlGetNuevosMensajes").val() + '?ultimo_id=' + valor_ultimo_id,
                 data: {
-                    ultimo_id: valor_ultimo_id,
                     receptor_id: select_receptor.val()
                 },
                 dataType: "json",
@@ -289,6 +292,8 @@
                             contador_tiempo = 0;
                         }
                     }
+                    // eliminar duplicados
+                    eliminaDuplicados();
                 }
             });
         }
@@ -321,6 +326,8 @@
                             mensaje_txt.val("");
                             valor_ultimo_id = response.mensaje.id;
                             contendor_mensajes.append(response.html_mensaje);
+                            // eliminar duplicados
+                            eliminaDuplicados();
                             setTimeout(() => {
                                 posicionarScroll();
                             }, 100);
@@ -341,6 +348,18 @@
             let vacio = contendor_mensajes.children(".vacio");
             if (vacio)
                 vacio.remove();
+        }
+
+        function eliminaDuplicados() {
+            let mensajes = contendor_mensajes.children(".mensaje");
+            mensajes.each(function() {
+                let data_id = $(this).attr("data-id");
+                let total_iguales = contendor_mensajes.children('.mensaje[data-id="' + data_id + '"]');
+                if (total_iguales.length > 1) {
+                    total_iguales[0].remove();
+                    console.log("ELIMINO UN DUPLICADO " + data_id);
+                }
+            })
         }
     </script>
 @endsection

@@ -42,50 +42,6 @@
                                 </div>
                                 <div class="nivel">
                                     <div class="texto">
-                                        INICIAL
-                                    </div>
-                                    <div class="contenedor_grados">
-                                        <div class="grado">
-                                            1º
-                                        </div>
-                                        <div class="grado">
-                                            2º
-                                        </div>
-                                        <div class="total">
-                                            TOTAL
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nivel">
-                                    <div class="texto">
-                                        PRIMARIA
-                                    </div>
-                                    <div class="contenedor_grados">
-                                        <div class="grado">
-                                            1º
-                                        </div>
-                                        <div class="grado">
-                                            2º
-                                        </div>
-                                        <div class="grado">
-                                            3º
-                                        </div>
-                                        <div class="grado">
-                                            4º
-                                        </div>
-                                        <div class="grado">
-                                            5º
-                                        </div>
-                                        <div class="grado">
-                                            6º
-                                        </div>
-                                        <div class="total">
-                                            TOTAL
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nivel">
-                                    <div class="texto">
                                         SECUNDARIA
                                     </div>
                                     <div class="contenedor_grados">

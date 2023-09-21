@@ -56,6 +56,8 @@ class EstudianteController extends Controller
             $estudiante->foto = $nom_foto;
         }
         $nuevo_usuario->save();
+        // asignar usuario al estudiante
+        $estudiante->user_id = $nuevo_usuario->id;
 
         // usuario tutor
         $nombre_tutor = UserController::nombreUsuario($request->nom_padre_tutor, $request->app_padre_tutor, $request->apm_padre_tutor);
@@ -70,6 +72,9 @@ class EstudianteController extends Controller
         $nuevo_usuario->estado = 1;
         $nuevo_usuario->save();
 
+        // asignar el tutor al estudiante
+        $estudiante->user_tutor_id = $nuevo_usuario->id;
+
         // usuario madre
         if ($request->ci_madre && $request->nom_madre && $request->app_madre && $request->apm_madre) {
             $nombre_tutor = UserController::nombreUsuario($request->nom_padre_tutor, $request->app_padre_tutor, $request->apm_padre_tutor);
@@ -83,10 +88,9 @@ class EstudianteController extends Controller
             $nuevo_usuario->codigo = $nro_codigo;
             $nuevo_usuario->estado = 1;
             $nuevo_usuario->save();
+            // asignar madre
+            $estudiante->user_madre_id = $nuevo_usuario->id;
         }
-
-        $estudiante->user_id = $nuevo_usuario->id;
-
         $estudiante->save();
 
         return redirect()->route('estudiantes.index')->with('bien', 'Registro realizado con éxito');

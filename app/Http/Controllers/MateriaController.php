@@ -102,14 +102,10 @@ class MateriaController extends Controller
         $campos = campo::all();
 
         $niveles = [
-            'NIVEL INICIAL',
-            'PRIMARIA',
             'SECUNDARIA',
         ];
 
         $grados = [
-            'NIVEL INICIAL' => [1, 2],
-            'PRIMARIA' => [1, 2, 3, 4, 5, 6],
             'SECUNDARIA' => [1, 2, 3, 4, 5, 6],
         ];
 

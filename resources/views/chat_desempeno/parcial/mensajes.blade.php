@@ -4,6 +4,6 @@
     @endforeach
 @else
     <div class="row vacio">
-        <div class="col-md-12 text-center"><i class="text-gray">SIN MENSAJES</i></div>
+        <div class="col-md-12 text-center"><i class="text-white">SIN MENSAJES</i></div>
     </div>
 @endif

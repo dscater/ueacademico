@@ -44,7 +44,7 @@
                                     <th>Correo</th>
                                     <th>Logo</th>
                                     <th>Web</th>
-                                    <th>Actividad económica</th>
+                                    <th>Actividad</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
