@@ -165,7 +165,10 @@ class AdministrativoController extends Controller
         if ($request->tipo != 'NINGUNO') {
             if ($usuario->user) {
                 $usuario->user->tipo = $request->tipo;
+                $usuario->foto = $usuario->foto;
+                $usuario->user->foto = $usuario->foto;
                 $usuario->user->save();
+                $usuario->save();
             } else {
                 // si se le asigna un usuario y no tiene crear uno  nuevo
                 $nombre_administrativo = UserController::nombreUsuario($request->nombre, $request->paterno, $request->materno);
@@ -196,6 +199,8 @@ class AdministrativoController extends Controller
         } else {
             if ($usuario->user) {
                 // si tiene un usuario, pero se le puso NINGUNO eliminarlo
+                $usuario->foto = $usuario->foto;
+                $usuario->user->foto = $usuario->foto;
                 $usuario->user_id = null;
                 $usuario->save();
                 $usuario->user->delete();

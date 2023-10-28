@@ -218,7 +218,7 @@ class ProfesorController extends Controller
             $extension = "." . $file_foto->getClientOriginalExtension();
             $nom_foto = $usuario->nombre . time() . $extension;
             $file_foto->move(public_path() . "/imgs/users/", $nom_foto);
-            $usuario->user->foto = $usuario->foto;
+            $usuario->user->foto = $nom_foto;
             $usuario->foto = $nom_foto;
         }
 
@@ -284,8 +284,8 @@ class ProfesorController extends Controller
         return 'mostrar usuario';
     }
 
-    public function formulario(Profesor $profesor){
-
+    public function formulario(Profesor $profesor)
+    {
     }
 
     public function destroy(Profesor $usuario)

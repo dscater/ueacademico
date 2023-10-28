@@ -26,7 +26,7 @@ class InscripcionController extends Controller
         $estudiantes = Estudiante::select('estudiantes.*')
             ->where('estudiantes.estado', 1)
             ->get();
-        $paralelos = paralelo::all();
+        $paralelos = Paralelo::all();
 
         $array_estudiantes[''] = 'Seleccione...';
         $array_paralelos[''] = 'Seleccione...';
@@ -42,6 +42,14 @@ class InscripcionController extends Controller
 
     public function store(Request $request)
     {
+        $existe = Inscripcion::where("gestion", $request->gestion)
+            ->where("estudiante_id", $request->estudiante_id)
+            ->where("status", 1)->get()->first();
+
+        if ($existe) {
+            return redirect()->route('inscripcions.index')->with('error', "El estudiante ya cuenta con una inscripción en la gestión: " . $request->gestion);
+        }
+
         $request['fecha_registro'] = date('Y-m-d');
         $request['estado'] = 'REPROBADO';
         $request['status'] = 1;
@@ -103,7 +111,7 @@ class InscripcionController extends Controller
         $estudiantes = Estudiante::select('estudiantes.*')
             ->where('estudiantes.estado', 1)
             ->get();
-        $paralelos = paralelo::all();
+        $paralelos = Paralelo::all();
 
         $array_estudiantes[''] = 'Seleccione...';
         $array_paralelos[''] = 'Seleccione...';
